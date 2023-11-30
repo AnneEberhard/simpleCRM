@@ -1,12 +1,52 @@
 .spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
-  .matDrawerContainer {
-    height: 100vh;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  
+.matDrawerContainer {
+  height: 100vh;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 .menuIcon {
+  cursor: pointer;
+}
+
+.sideNav {
+  width: 300px;
+}
+
+.logoContainer {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0 16px 0 16px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+mat-toolbar,
+mat-toolbar-row {
+  height: 56px;
+  min-height: 56px;
+}
+
+.sideNavMenu {
+  list-style: none;
+  padding: 0;
+  margin:0;
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 0 16px 0px 16px;
+    height: 48px;
     cursor: pointer;
+
+    mat-icon {
+        margin-right: 16px;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
 }
