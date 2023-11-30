@@ -9,14 +9,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
+
+import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserComponent
+    UserComponent,
+    DialogAddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,8 @@ import { UserComponent } from './user/user.component';
     MatIconModule, 
     MatSidenavModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
