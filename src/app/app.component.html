@@ -3,17 +3,19 @@
     <div class="logoContainer">LOGO PLaceholder</div>
 
     <ul class="sideNavMenu">
-      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li><mat-icon>person</mat-icon>User</li>
+      <li routerLink="/dashboard" routerLinkActive="router-link-active"><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li routerLink="/user" routerLinkActive="router-link-active"><mat-icon>person</mat-icon>User</li>
     </ul>
   </mat-drawer>
 
   <div class="topBarContent">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-      <mat-icon class="menuIcon" (click)="drawer.toggle()">menu</mat-icon>
-      <span>Simple CRM</span>
-    </mat-toolbar-row>
+        <mat-icon class="menuIcon" (click)="drawer.toggle()">menu</mat-icon>
+        <span>Simple CRM</span>
+      </mat-toolbar-row>
     </mat-toolbar>
   </div>
+  <div class="routerContainer"><router-outlet></router-outlet></div>
+  
 </mat-drawer-container>
