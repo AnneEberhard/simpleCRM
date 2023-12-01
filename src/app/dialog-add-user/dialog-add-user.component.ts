@@ -8,20 +8,28 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./dialog-add-user.component.scss']
 })
 export class DialogAddUserComponent {
- user = new User();
- birthDate!: Date;
+  user = new User();
+  birthDate!: Date;
+  loading: boolean = false;
 
 
- constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore) { }
 
   async saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
+    this.loading = true;
+    if (this.birthDate) { //CAVE DELETE THIS if other required possibilities found
+      this.user.birthDate = this.birthDate.getTime();
+    }
     let docRef = this.getUsersRef();
-    await addDoc(docRef, this.user.toJSON()).catch(
-      (err) => { console.error(err); }
-    );
+    await addDoc(docRef, this.user.toJSON())
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(
+        (err) => { console.error(err); }
+      );
   }
-  
+
   getUsersRef() {
     return collection(this.firestore, 'users');
   }
@@ -30,7 +38,7 @@ export class DialogAddUserComponent {
     return doc(collection(this.firestore, collectionID), documentID)
   }
 
- 
+
   onNoClick() {
     console.log('closed')
   }

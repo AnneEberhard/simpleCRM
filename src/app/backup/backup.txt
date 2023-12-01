@@ -1,0 +1,18 @@
+async saveUserChatGPT() {
+    this.loading = true;
+    if (this.birthDate) {
+      this.user.birthDate = this.birthDate.getTime();
+    }
+  
+    let docRef = this.getUsersRef();
+  
+    try {
+      await addDoc(docRef, this.user.toJSON());
+      console.log('user uploaded')
+    } catch (err) {
+      console.error(err);
+    } finally {
+      console.log('anyways')
+      this.loading = false;
+    }
+  }
