@@ -1,5 +1,62 @@
 .addUserButton {
-    position: absolute;
-    right: 56px;
-    bottom:56px;
+  position: absolute;
+  right: 56px;
+  bottom: 56px;
+}
+
+mat-card-content {
+  padding: 0!important;
+}
+
+table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  th {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: start;
+    &:first-child {
+      padding-left: 16px;
+    }
+
+    &:last-child {
+      padding-right: 16px;
+    }
+  }
+
+  tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+
+    &:first-child {
+      cursor: default;
+      height: 48px;
+      &:hover {
+        background-color: transparent;
+    }
+
+    &:last-child {
+      border-bottom: none;
+   
+    }
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    td {
+      height: 48px;
+      &:first-child {
+        padding-left: 16px;
+      }
+
+      &:last-child {
+        padding-right: 16px;
+      }
+    }
+  }
 }

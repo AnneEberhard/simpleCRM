@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Firestore, collection, doc, addDoc } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -13,7 +15,7 @@ export class DialogAddUserComponent {
   loading: boolean = false;
 
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
 
   async saveUser() {
     this.loading = true;
@@ -24,6 +26,7 @@ export class DialogAddUserComponent {
     await addDoc(docRef, this.user.toJSON())
       .then(() => {
         this.loading = false;
+        this.dialogRef.close();
       })
       .catch(
         (err) => { console.error(err); }
@@ -40,7 +43,7 @@ export class DialogAddUserComponent {
 
 
   onNoClick() {
-    console.log('closed')
+    this.dialogRef.close();
   }
 
 }

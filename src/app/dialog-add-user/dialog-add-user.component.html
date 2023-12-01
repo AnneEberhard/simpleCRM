@@ -14,6 +14,13 @@
       <!--mat-hint>Please enter a name</mat-hint-->
     </mat-form-field>
   </div>
+  <div class="addUserDialog">
+    <mat-form-field appearance="outline" class="width100">
+      <mat-label>Email</mat-label>
+      <input [disabled]="loading" [(ngModel)]="user.email" matInput placeholder="Placeholder" />
+      <!--mat-hint>Please enter a name</mat-hint-->
+    </mat-form-field>
+  </div>
   <div>
     <mat-form-field appearance="outline" class="width100">
       <mat-label>Birth Date</mat-label>
@@ -22,7 +29,6 @@
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
   </div>
   <div class="addUserDialog">
     <mat-form-field appearance="outline" class="width100">

@@ -1,3 +1,5 @@
+import { EmailValidator } from "@angular/forms";
+
 export class User {
     public firstName: string;
     public lastName: string;
@@ -5,6 +7,7 @@ export class User {
     public address: string;
     public zipCode: number;
     public city: string;
+    public email: string;
 
     constructor(obj?: any) {
         this.firstName = obj ? obj.firstName : '';
@@ -13,6 +16,7 @@ export class User {
         this.address = obj ? obj.address : '';
         this.zipCode = obj ? obj.zipCode : '';
         this.city = obj ? obj.city : '';
+        this.email = obj ? obj.email : '';
     }
 
     public toJSON() {
@@ -22,7 +26,8 @@ export class User {
             birthDate: this.birthDate,
             address: this.address,
             zipCode: this.zipCode,
-            city: this.city
+            city: this.city,
+            email: this.email
         };
       }
     }
