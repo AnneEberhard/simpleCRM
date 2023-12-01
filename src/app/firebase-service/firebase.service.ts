@@ -21,15 +21,11 @@ export class FirebaseService {
     return onSnapshot(q, (list) => {
       this.userList = [];
       list.forEach(element => {
-        console.log(element);
         this.userList.push((element.data()));
-        console.log(this.userList);
       }
       )
     })
   }
-
-
 
   getUsersRef() {
     return collection(this.firestore, 'users');
