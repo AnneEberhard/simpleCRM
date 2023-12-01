@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Firestore, collection, doc, addDoc } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
 
 @Component({
@@ -10,12 +11,28 @@ export class DialogAddUserComponent {
  user = new User();
  birthDate!: Date;
 
+
+ constructor(private firestore: Firestore) { }
+
+  async saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    let docRef = this.getUsersRef();
+    await addDoc(docRef, this.user.toJSON()).catch(
+      (err) => { console.error(err); }
+    );
+  }
+  
+  getUsersRef() {
+    return collection(this.firestore, 'users');
+  }
+
+  getSingleUserRef(collectionID: string, documentID: string) {
+    return doc(collection(this.firestore, collectionID), documentID)
+  }
+
+ 
   onNoClick() {
     console.log('closed')
   }
 
-  saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
-    console.log('new User', this.user)
-  }
 }
