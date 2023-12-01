@@ -16,3 +16,27 @@ async saveUserChatGPT() {
       this.loading = false;
     }
   }
+
+    setNoteObject(obj: any, id: string): User {
+    return {
+      firstName: obj.firstName || '',
+      lastName: obj.lastName|| '',
+      birthDate: obj.birthDate || '',
+      address: obj.address || '',
+      zipCode: obj.zipCode || '',
+      city: obj.city || '',
+      email: obj.email || ''
+    }}
+
+      subUserList() {
+    const q = query(this.getUsersRef(), limit(100));
+    return onSnapshot(q, (list) => {
+      this.userList = [];
+      list.forEach(element => {
+        console.log(element);
+        this.userList.push((element.data().toJSON()));
+        console.log(this.userList, element.id);
+      }
+      )
+    })
+  }

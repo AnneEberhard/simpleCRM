@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Firestore, collection, doc, addDoc } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
+import { FirebaseService } from '../firebase-service/firebase.service';
 
 
 @Component({
@@ -15,14 +16,14 @@ export class DialogAddUserComponent {
   loading: boolean = false;
 
 
-  constructor(private firestore: Firestore, public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
+  constructor(private firestore: Firestore, private firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
 
   async saveUser() {
     this.loading = true;
     if (this.birthDate) { //CAVE DELETE THIS if other required possibilities found
       this.user.birthDate = this.birthDate.getTime();
     }
-    let docRef = this.getUsersRef();
+    let docRef = this.firebaseservice.getUsersRef();
     await addDoc(docRef, this.user.toJSON())
       .then(() => {
         this.loading = false;
@@ -32,15 +33,6 @@ export class DialogAddUserComponent {
         (err) => { console.error(err); }
       );
   }
-
-  getUsersRef() {
-    return collection(this.firestore, 'users');
-  }
-
-  getSingleUserRef(collectionID: string, documentID: string) {
-    return doc(collection(this.firestore, collectionID), documentID)
-  }
-
 
   onNoClick() {
     this.dialogRef.close();

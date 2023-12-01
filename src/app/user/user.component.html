@@ -6,18 +6,11 @@
                 <th>Email</th>
                 <th>City</th>
             </tr>
-            <tr>
-                <td>1blabla</td>
-                <td>1blabla</td>
-                <td>1blabla</td>
-            </tr>
-            <tr>
-                <td>1blabla</td>
-                <td>1blabla</td>
-                <td>1blabla</td>
-            </tr>
-
-
+            <tr *ngFor="let user of firebaseservice.userList">
+                <td>{{ user.firstName }} {{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.city }}</td>
+              </tr>
         </table>
     </mat-card-content>
   </mat-card>

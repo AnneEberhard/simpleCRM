@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DataServiceService } from './data-service.service';
+import { FirebaseService } from './firebase.service';
 
-describe('DataServiceService', () => {
-  let service: DataServiceService;
+describe('FirebaseService', () => {
+  let service: FirebaseService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DataServiceService);
+    service = TestBed.inject(FirebaseService);
   });
 
   it('should be created', () => {
