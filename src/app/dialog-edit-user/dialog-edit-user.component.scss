@@ -1,0 +1,11 @@
+.addUserDialog {
+    display: flex;
+    
+    mat-dialog-content:first-child {
+        margin-top: 8px;
+      }
+}
+
+.dialogContainer {
+    position: relative;
+}

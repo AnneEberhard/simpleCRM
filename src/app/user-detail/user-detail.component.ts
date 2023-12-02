@@ -48,12 +48,14 @@ export class UserDetailComponent implements OnInit {
 
   openEditUserDialog() {
     console.log('open Edit');
-    this.dialog.open(DialogEditUserComponent);
+    const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.componentInstance.user = this.activeUser;
   }
 
   openEditAddressDialog() {
     console.log('open Edit');
-    this.dialog.open(DialogEditAddressComponent);
+    const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.componentInstance.user = this.activeUser;
   }
 
   openArchiveDialog() {

@@ -26,7 +26,6 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ImprintComponent } from './imprint/imprint.component';
-import { DialogEditAdressComponent } from './dialog-edit-adress/dialog-edit-adress.component';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 
@@ -38,7 +37,6 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     DialogAddUserComponent,
     UserDetailComponent,
     ImprintComponent,
-    DialogEditAdressComponent,
     DialogEditAddressComponent,
     DialogEditUserComponent
   ],
