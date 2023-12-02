@@ -1,10 +1,20 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .marginRight16 {
-    margin-right: 16px;
+  margin-right: 16px;
+}
+
+.marginTop32 {
+  margin-top: 32px;
 }
 
 .width100 {
-    width: 100%
+  width: 100%;
 }

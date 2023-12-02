@@ -17,18 +17,12 @@ export class UserComponent implements OnInit{
   position = new FormControl(this.positionOptions[1]);
 
   user = new User();
-
   
-  constructor(public dialog: MatDialog, private firestore: Firestore, public firebaseservice: FirebaseService) { 
-  }
-
+  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService) {  }
 
   ngOnInit(): void {
     this.firebaseservice.subUserList() 
     }
-  
-
-
 
 
   openDialogue() {
