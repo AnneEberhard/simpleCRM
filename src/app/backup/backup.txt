@@ -59,3 +59,16 @@ OHNE ID FUNTKIONIERT
       )
     })
   }
+
+  CHATGPT LÖSUNG
+    ngOnInit(): void {
+    this.route.url.subscribe(segments => {
+      const lastSegment = segments[segments.length - 1];
+      this.activeId = lastSegment.toString();
+      console.log('activeId:', this.activeId);
+    });}
+
+    aADAPTED SOLUTON; CAUSES PROBLEMS WITH THIS:ACTIVE ID    this.route.paramMap.subscribe(paramMap => {
+      this.activeId = paramMap.get('id').toString();
+      console.log('activeId:', this.activeId);
+    });

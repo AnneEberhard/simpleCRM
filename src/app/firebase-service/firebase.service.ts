@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, doc, updateDoc, limit, query, onSnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, doc, updateDoc, limit, query, onSnapshot, QueryDocumentSnapshot, DocumentSnapshot, getDoc } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
 
 @Injectable({
@@ -10,6 +10,7 @@ export class FirebaseService {
   userList: any = [];
 
   unsubUserList;
+
 
   constructor(private firestore: Firestore,) {
     this.unsubUserList = this.subUserList();
@@ -27,6 +28,23 @@ export class FirebaseService {
       }
       )
     })
+  }
+
+  async fetchSingleUser(activeId: string): Promise<User> {
+    const docRef = this.getSingleUserRef('users', activeId);
+    try {
+      const docSnapshot = await getDoc(docRef);
+      if (docSnapshot.exists()) {
+        const userData = docSnapshot.data() as User;
+        return userData;
+      } else {
+        console.log('Dokument nicht gefunden.');
+        throw new Error('Dokument nicht gefunden.');
+      }
+    } catch (error) {
+      console.error('Fehler beim Abrufen des Dokuments:', error);
+      throw new Error('Fehler beim Abrufen des Dokuments.');
+    }
   }
 
  //async deleteUser(UserId: string) {
