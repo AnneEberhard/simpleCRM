@@ -16,6 +16,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
@@ -25,6 +26,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ImprintComponent } from './imprint/imprint.component';
+import { DialogEditAdressComponent } from './dialog-edit-adress/dialog-edit-adress.component';
+import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
+import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,10 @@ import { ImprintComponent } from './imprint/imprint.component';
     UserComponent,
     DialogAddUserComponent,
     UserDetailComponent,
-    ImprintComponent
+    ImprintComponent,
+    DialogEditAdressComponent,
+    DialogEditAddressComponent,
+    DialogEditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +59,7 @@ import { ImprintComponent } from './imprint/imprint.component';
     FormsModule,
     MatProgressBarModule,
     MatCardModule,
+    MatMenuModule,
     provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-7dc7e","appId":"1:537390772148:web:ec018746afd6bb61518ce1","storageBucket":"simple-crm-7dc7e.appspot.com","apiKey":"AIzaSyADpFj9e0FEYJyZ9uPLl2KUfQTTOslk-uI","authDomain":"simple-crm-7dc7e.firebaseapp.com","messagingSenderId":"537390772148"})),
     provideFirestore(() => getFirestore())
   ],

@@ -72,3 +72,21 @@ OHNE ID FUNTKIONIERT
       this.activeId = paramMap.get('id').toString();
       console.log('activeId:', this.activeId);
     });
+
+    VERSUCH; FETCH AUSZULAGERN
+      ngOnInit(): void {
+    this.route.url.subscribe(segments => {
+      const lastSegment = segments[segments.length - 1];
+      this.activeId = lastSegment.toString();
+      console.log('activeId:', this.activeId);
+    });
+  
+    this.firebaseservice.fetchSingleUser(this.activeId)
+      .then(user => {
+        this.activeUser = user;
+        console.log(this.activeUser);
+      })
+      .catch(error => {
+        console.error(error);
+    });
+  }

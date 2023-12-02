@@ -1,24 +1,40 @@
 <mat-card class="userDetailHeader">
+        <mat-card-actions class="pinUpperRightCorner">
+          <button mat-icon-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item (click)="openEditUserDialog()">Edit</button>
+            <button mat-menu-item (click)="openArchiveDialog()">Archive</button>
+          </mat-menu>
+        </mat-card-actions>
   <mat-card-content>
     <div class="profilePicContainer">
       <img src="assets/img/icons8-benutzer-90.png" />
     </div>
     <div class="userDetailsHeaderText">
-      <h2>{{this.activeUser.firstName}} {{this.activeUser.lastName}}</h2>
-      <span>{{this.activeUser.email}}</span>
+      <h2>{{ this.activeUser.firstName }} {{ this.activeUser.lastName }}</h2>
+      <span>{{ this.activeUser.email }}</span>
     </div>
   </mat-card-content>
 </mat-card>
+
 <mat-card class="userDetail marginTop32">
-    <mat-card-header>
-        <mat-card-title>Address</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{this.activeUser.address}}</p>
-        <p>{{this.activeUser.zipCode}} {{this.activeUser.city}}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>Edit</button>
-        <button mat-button>Archive</button>
-      </mat-card-actions>
-    </mat-card>
+  <mat-card-actions class="pinUpperRightCorner">
+    <button mat-icon-button [matMenuTriggerFor]="addressMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #addressMenu="matMenu">
+      <button mat-menu-item (click)="openEditAddressDialog()">Edit</button>
+      <button mat-menu-item (click)="openArchiveDialog()">Archive</button>
+    </mat-menu>
+  </mat-card-actions>
+
+  <mat-card-header>
+    <mat-card-title>Address</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ this.activeUser.address }}</p>
+    <p>{{ this.activeUser.zipCode }} {{ this.activeUser.city }}</p>
+  </mat-card-content>
+</mat-card>
