@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Component, inject } from '@angular/core';
-import { Firestore, collectionData, collection, doc, updateDoc, limit, query, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, doc, updateDoc, limit, query, onSnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { User } from 'src/models/user.class';
 
 @Injectable({
@@ -18,25 +17,59 @@ export class FirebaseService {
 
   subUserList() {
     const q = query(this.getUsersRef(), limit(100));
-    return onSnapshot(q, (list) => {
+    return onSnapshot(q, (querySnapshot) => {
       this.userList = [];
-      list.forEach(element => {
-        this.userList.push((element.data()));
+      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+        const docId = doc.id;
+        const userData = doc.data();
+        const userWithId = { ...userData, id: docId };
+        this.userList.push(userWithId);
       }
       )
     })
+  }
+
+ //async deleteUser(UserId: string) {
+  //collectionId = 'users';
+ //  await deleteDoc(this.getSingleUserRef(collectionId, documentID)).catch(
+ //    (err) => { console.error(err) }
+ //  );
+ //}
+
+  async updateNote(user: User) {
+    if (user.firstName) { //ID war optional, deshalb die if, sonst gibt es Fehler
+      let docRef = this.getSingleUserRef('users', user.firstName);
+      await updateDoc(docRef, this.getCleanJSON(user)).catch(
+        (err) => { console.error(err); } //um Fehler abzufangen
+      );
+    }
   }
 
   getUsersRef() {
     return collection(this.firestore, 'users');
   }
 
-  getSingleUserRef(collectionID: string, documentID: string) {
-    return doc(collection(this.firestore, collectionID), documentID)
+  getSingleUserRef(collectionID: string, userId: string) {
+    return doc(collection(this.firestore, collectionID), userId)
   }
 
   ngonDestroy() {
     this.unsubUserList(); //beendet das alles wieder
   }
 
+
+
+
+
+  getCleanJSON(obj: User) { //um mein JSON aufzuräumen für bestimmte Funktionen
+    return {
+      firstName: obj.firstName || '',
+      lastName: obj.lastName|| '',
+      birthDate: obj.birthDate || '',
+      address: obj.address || '',
+      zipCode: obj.zipCode || '',
+      city: obj.city || '',
+      email: obj.email || ''
+    }
+  }
 }

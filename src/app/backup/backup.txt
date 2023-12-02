@@ -1,3 +1,4 @@
+VERSION VON CHATGPT
 async saveUserChatGPT() {
     this.loading = true;
     if (this.birthDate) {
@@ -17,6 +18,7 @@ async saveUserChatGPT() {
     }
   }
 
+ERGIBT FEHLER; VERMUTLICH WEGEN : User
     setNoteObject(obj: any, id: string): User {
     return {
       firstName: obj.firstName || '',
@@ -36,6 +38,23 @@ async saveUserChatGPT() {
         console.log(element);
         this.userList.push((element.data().toJSON()));
         console.log(this.userList, element.id);
+      }
+      )
+    })
+  }
+
+DIREKT IN HTML EINGEBAUT
+    closeDialog() {
+    this.dialogRef.close();
+  }
+
+OHNE ID FUNTKIONIERT
+  subUserList() {
+    const q = query(this.getUsersRef(), limit(100));
+    return onSnapshot(q, (list) => {
+      this.userList = [];
+      list.forEach(element => {
+        this.userList.push((element.data()));
       }
       )
     })

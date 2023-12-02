@@ -34,8 +34,6 @@ export class DialogAddUserComponent {
       );
   }
 
-  onNoClick() {
-    this.dialogRef.close();
-  }
+
 
 }
