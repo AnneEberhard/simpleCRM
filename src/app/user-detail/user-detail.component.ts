@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class UserDetailComponent implements OnInit {
 
   activeId!: string;
-  activeUser = new User;
+  activeUser!:User;
 
   constructor(public firebaseservice: FirebaseService, public dialog: MatDialog, private route: ActivatedRoute) { }
 
@@ -34,10 +34,7 @@ export class UserDetailComponent implements OnInit {
       const docSnapshot = await getDoc(docRef);
       if (docSnapshot.exists()) {
         const userData = docSnapshot.data() as User;
-        const userWithId = { ...userData, id: this.activeId };
-        this.activeUser = userData;
-        console.log('Single User Data:', userWithId);
-        console.log('Single User Name:', userData.city);
+        this.activeUser = new User(userData);
       } else {
         console.log('Dokument nicht gefunden.');
       }
@@ -45,17 +42,19 @@ export class UserDetailComponent implements OnInit {
       console.error('Fehler beim Abrufen des Dokuments:', error);
     }
   }
-
+  
   openEditUserDialog() {
     console.log('open Edit');
     const dialog = this.dialog.open(DialogEditUserComponent);
-    dialog.componentInstance.user = this.activeUser;
+    dialog.componentInstance.user = new User(this.activeUser.toJSON());
   }
+
 
   openEditAddressDialog() {
     console.log('open Edit');
+    console.log('Typ von this.activeUser:', typeof this.activeUser);
     const dialog = this.dialog.open(DialogEditAddressComponent);
-    dialog.componentInstance.user = this.activeUser;
+    dialog.componentInstance.user = new User(this.activeUser.toJSON());
   }
 
   openArchiveDialog() {

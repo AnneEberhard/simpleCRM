@@ -20,6 +20,7 @@ export class User {
     }
 
     public toJSON() {
+        console.log('toJSON wurde aufgerufen');
         return {
             firstName: this.firstName,
             lastName: this.lastName,
