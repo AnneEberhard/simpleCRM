@@ -1,0 +1,36 @@
+<div class="dialogContainer">
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+  <mat-card>
+    <mat-card-header>
+      <h1 mat-dialog-title>Edit Level</h1>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card>
+        <mat-label>Current Level</mat-label>
+        <mat-card-content>{{ this.user?.level }} </mat-card-content>
+      </mat-card>
+      <mat-form-field appearance="outline" class="marginTop32 ">
+        <mat-label>New Level</mat-label>
+        <input [(ngModel)]="value" matInput placeholder="0-10" type="number" min="0" max="10" />
+      </mat-form-field>
+      <mat-card-actions align="end">
+        <button
+          mat-button
+          [disabled]="loading"
+          (click)="this.dialogRef.close()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-button
+          [disabled]="loading"
+          (click)="saveUser()"
+          cdkFocusInitial
+        >
+          Save
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

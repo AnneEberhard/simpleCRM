@@ -17,6 +17,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatSliderModule} from '@angular/material/slider';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
@@ -28,6 +30,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
+import { DialogEditNotesComponent } from './dialog-edit-notes/dialog-edit-notes.component';
+import { DialogEditLevelComponent } from './dialog-edit-level/dialog-edit-level.component';
+import { DialogArchiveComponent } from './dialog-archive/dialog-archive.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,10 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     UserDetailComponent,
     ImprintComponent,
     DialogEditAddressComponent,
-    DialogEditUserComponent
+    DialogEditUserComponent,
+    DialogEditNotesComponent,
+    DialogEditLevelComponent,
+    DialogArchiveComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +66,8 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,
+    MatCheckboxModule,
+    MatSliderModule,
     provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-7dc7e","appId":"1:537390772148:web:ec018746afd6bb61518ce1","storageBucket":"simple-crm-7dc7e.appspot.com","apiKey":"AIzaSyADpFj9e0FEYJyZ9uPLl2KUfQTTOslk-uI","authDomain":"simple-crm-7dc7e.firebaseapp.com","messagingSenderId":"537390772148"})),
     provideFirestore(() => getFirestore())
   ],

@@ -1,20 +1,20 @@
 <mat-card class="userDetailHeader">
-        <mat-card-actions class="pinUpperRightCorner">
-          <button mat-icon-button [matMenuTriggerFor]="userMenu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #userMenu="matMenu">
-            <button mat-menu-item (click)="openEditUserDialog()">Edit</button>
-            <button mat-menu-item (click)="openArchiveDialog()">Archive</button>
-          </mat-menu>
-        </mat-card-actions>
+  <mat-card-actions class="pinUpperRightCorner">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item (click)="openEditUserDialog()">Edit</button>
+      <button mat-menu-item (click)="openArchiveDialog()">Archive</button>
+    </mat-menu>
+  </mat-card-actions>
   <mat-card-content>
     <div class="profilePicContainer">
       <img src="assets/img/icons8-benutzer-90.png" />
     </div>
     <div class="userDetailsHeaderText">
-      <h2>{{ this.activeUser?.firstName }} {{ this.activeUser?.lastName }}</h2>
-      <span>{{ this.activeUser?.email }}</span>
+      <h2>{{ this.user?.firstName }} {{ this.user?.lastName }}</h2>
+      <span>{{ this.user?.email }}</span>
     </div>
   </mat-card-content>
 </mat-card>
@@ -28,12 +28,46 @@
       <button mat-menu-item (click)="openEditAddressDialog()">Edit</button>
     </mat-menu>
   </mat-card-actions>
-
   <mat-card-header>
     <mat-card-title>Address</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>{{ this.activeUser?.address }}</p>
-    <p>{{ this.activeUser?.zipCode }} {{ this.activeUser?.city }}</p>
+    <p>{{ this.user?.address }}</p>
+    <p>{{ this.user?.zipCode }} {{ this.user?.city }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="userDetail marginTop32">
+  <mat-card-actions class="pinUpperRightCorner">
+    <button mat-icon-button [matMenuTriggerFor]="notesMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #notesMenu="matMenu">
+      <button mat-menu-item (click)="openEditNotesDialog()">Edit</button>
+    </mat-menu>
+  </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title [ngClass]="{ alert: this.user?.issue }">Notes</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ this.user?.notes }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="userDetail marginTop32">
+  <mat-card-actions class="pinUpperRightCorner">
+    <button mat-icon-button [matMenuTriggerFor]="levelMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #levelMenu="matMenu">
+      <button mat-menu-item (click)="openEditLevelDialog()">Edit</button>
+    </mat-menu>
+  </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title>Level</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ this.user?.level }}</p>
+    <mat-progress-bar mode="determinate" value="{{ value }}"></mat-progress-bar>
   </mat-card-content>
 </mat-card>

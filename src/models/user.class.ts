@@ -28,7 +28,6 @@ export class User {
     }
 
     public toJSON() {
-        // Überprüfe, ob die Werte vorhanden sind, andernfalls setze Standardwerte
         const json = {
           id: this.id,
           firstName: this.firstName,
@@ -38,9 +37,9 @@ export class User {
           zipCode: this.zipCode,
           city: this.city,
           email: this.email,
-          level: this.level !== undefined ? this.level : 0, // Setze 0, wenn level nicht vorhanden ist
-          notes: this.notes !== undefined ? this.notes : '', // Setze leeren String, wenn notes nicht vorhanden ist
-          issue: this.issue !== undefined ? this.issue : 'false', // Setze leeren String, wenn issue nicht vorhanden ist
+          level: this.level !== undefined ? this.level : 0, 
+          notes: this.notes !== undefined ? this.notes : '', 
+          issue: this.issue !== undefined ? this.issue : 'false', 
         };      
         return json;
       }

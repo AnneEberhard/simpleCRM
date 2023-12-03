@@ -22,6 +22,13 @@ body {
   width: 100%;
 }
 
+.width60vw {
+  width: 60vw;
+}
+
+.alert {
+  color: rgb(255,64,129);
+}
 
  .pinUpperRightCorner {
   position: absolute;
@@ -31,4 +38,16 @@ body {
 
  mat-dialog-content:first-child {
   margin-top: 8px;
+}
+
+.dialog {
+  display: flex;
+  
+  mat-dialog-content:first-child {
+      margin-top: 8px;
+    }
+}
+
+.dialogContainer {
+  position: relative;
 }
