@@ -26,7 +26,6 @@ export class UserComponent implements OnInit{
    }
 
   ngOnInit(): void {
-   // this.firebaseservice.subUserList() 
    this.unsubUserList = this.subUserList();
     }
 
@@ -35,16 +34,14 @@ export class UserComponent implements OnInit{
     
       return onSnapshot(q, (querySnapshot) => {
         this.userList = [];
-    
         querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
           const docId = doc.id;
           const userData = doc.data();
-          const userWithId = new User({ id: docId, ...userData });
-          this.userList.push(userWithId);
-          //this.firebaseservice.updateUser('users', userWithId);
+          const user = new User(userData);
+          user.id = docId;
+          this.userList.push(user);
+          this.firebaseservice.updateUser('users', user);
         });
-    
-        console.log(this.userList);
       });
     }
     
@@ -54,7 +51,7 @@ export class UserComponent implements OnInit{
   }
 
   ngonDestroy() {
-    //this.unsubUserList(); //beendet das alles wieder
+    this.unsubUserList(); //beendet das alles wieder
   }
 }
 

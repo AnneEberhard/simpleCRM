@@ -45,3 +45,6 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+
+# Admin Key
+simple-crm-7dc7e-firebase-adminsdk-zh9gl-f8366e94e9.json
