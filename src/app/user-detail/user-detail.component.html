@@ -13,8 +13,8 @@
       <img src="assets/img/icons8-benutzer-90.png" />
     </div>
     <div class="userDetailsHeaderText">
-      <h2>{{ this.activeUser.firstName }} {{ this.activeUser.lastName }}</h2>
-      <span>{{ this.activeUser.email }}</span>
+      <h2>{{ this.activeUser?.firstName }} {{ this.activeUser?.lastName }}</h2>
+      <span>{{ this.activeUser?.email }}</span>
     </div>
   </mat-card-content>
 </mat-card>
@@ -34,7 +34,7 @@
     <mat-card-title>Address</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>{{ this.activeUser.address }}</p>
-    <p>{{ this.activeUser.zipCode }} {{ this.activeUser.city }}</p>
+    <p>{{ this.activeUser?.address }}</p>
+    <p>{{ this.activeUser?.zipCode }} {{ this.activeUser?.city }}</p>
   </mat-card-content>
 </mat-card>

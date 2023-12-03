@@ -32,9 +32,11 @@ export class UserDetailComponent implements OnInit {
     const docRef = this.firebaseservice.getSingleUserRef('users', this.activeId);
     try {
       const docSnapshot = await getDoc(docRef);
+      console.log(docSnapshot);
       if (docSnapshot.exists()) {
         const userData = docSnapshot.data() as User;
         this.activeUser = new User(userData);
+        console.log(this.activeUser);
       } else {
         console.log('Dokument nicht gefunden.');
       }

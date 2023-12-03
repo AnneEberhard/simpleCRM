@@ -9,44 +9,7 @@ export class FirebaseService {
 
   userList: any = [];
 
-  unsubUserList;
-
-
-  constructor(private firestore: Firestore,) {
-    this.unsubUserList = this.subUserList();
-  }
-
-  subUserList() {
-    const q = query(this.getUsersRef(), limit(100));
-    return onSnapshot(q, (querySnapshot) => {
-      this.userList = [];
-      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-        const docId = doc.id;
-        const userData = doc.data();
-        const userWithId = { ...userData, id: docId };
-        this.userList.push(userWithId);
-      }
-      )
-    })
-  }
-
- // async fetchSingleUser(activeId: string): Promise<User> {
- //   const docRef = this.getSingleUserRef('users', activeId);
- //   try {
- //     const docSnapshot = await getDoc(docRef);
- //     if (docSnapshot.exists()) {
- //       const userData = docSnapshot.data() as User;
- //       return userData;
- //     } else {
- //       console.log('Dokument nicht gefunden.');
- //       throw new Error('Dokument nicht gefunden.');
- //     }
- //   } catch (error) {
- //     console.error('Fehler beim Abrufen des Dokuments:', error);
- //     throw new Error('Fehler beim Abrufen des Dokuments.');
- //   }
- // }
-
+  constructor(private firestore: Firestore,) { }
  
  //async deleteUser(UserId: string) {
   //collectionId = 'users';
@@ -55,10 +18,10 @@ export class FirebaseService {
  //  );
  //}
 
-  async updateNote(user: User) {
-    if (user.firstName) { //ID war optional, deshalb die if, sonst gibt es Fehler
-      let docRef = this.getSingleUserRef('users', user.firstName);
-      await updateDoc(docRef, this.getCleanJSON(user)).catch(
+  async updateUser(collectionId: string, user: User) {
+    if (user.id) { //ID war optional, deshalb die if, sonst gibt es Fehler
+      let docRef = this.getSingleUserRef(collectionId, user.id);
+      await updateDoc(docRef, user.toJSON()).catch(
         (err) => { console.error(err); } //um Fehler abzufangen
       );
     }
@@ -72,23 +35,5 @@ export class FirebaseService {
     return doc(collection(this.firestore, collectionID), userId)
   }
 
-  ngonDestroy() {
-    this.unsubUserList(); //beendet das alles wieder
-  }
 
-
-
-
-
-  getCleanJSON(obj: User) { //um mein JSON aufzuräumen für bestimmte Funktionen
-    return {
-      firstName: obj.firstName || '',
-      lastName: obj.lastName|| '',
-      birthDate: obj.birthDate || '',
-      address: obj.address || '',
-      zipCode: obj.zipCode || '',
-      city: obj.city || '',
-      email: obj.email || ''
-    }
-  }
 }

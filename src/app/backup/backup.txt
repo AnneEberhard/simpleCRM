@@ -90,3 +90,15 @@ OHNE ID FUNTKIONIERT
         console.error(error);
     });
   }
+
+    getCleanJSON(obj: User) { //um mein JSON aufzuräumen für bestimmte Funktionen
+    return {
+      firstName: obj.firstName || '',
+      lastName: obj.lastName|| '',
+      birthDate: obj.birthDate || '',
+      address: obj.address || '',
+      zipCode: obj.zipCode || '',
+      city: obj.city || '',
+      email: obj.email || ''
+    }
+  }
