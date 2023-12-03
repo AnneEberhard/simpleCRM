@@ -46,16 +46,23 @@ export class UserDetailComponent implements OnInit {
   }
   
   openEditUserDialog() {
-    console.log('open Edit');
     const dialog = this.dialog.open(DialogEditUserComponent);
+    dialog.afterClosed().subscribe((updatedUserData) => {
+      if (updatedUserData) {
+        this.activeUser = new User(updatedUserData);
+      }
+    });
     dialog.componentInstance.user = new User(this.activeUser.toJSON());
   }
 
 
   openEditAddressDialog() {
-    console.log('open Edit');
-    console.log('Typ von this.activeUser:', typeof this.activeUser);
     const dialog = this.dialog.open(DialogEditAddressComponent);
+    dialog.afterClosed().subscribe((updatedUserData) => {
+      if (updatedUserData) {
+        this.activeUser = new User(updatedUserData);
+      }
+    });
     dialog.componentInstance.user = new User(this.activeUser.toJSON());
   }
 

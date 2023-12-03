@@ -19,12 +19,11 @@ export class DialogEditAddressComponent {
 
   async saveUser() {
     this.loading = true;
-
-    let docRef = this.firebaseservice.getUsersRef();
-    await addDoc(docRef, this.user.toJSON())
+    await this.firebaseservice.updateUser('users', this.user)
       .then(() => {
         this.loading = false;
-        this.dialogRef.close();
+        const updatedUserData = this.user.toJSON();
+        this.dialogRef.close(updatedUserData);
       })
       .catch(
         (err) => { console.error(err); }
