@@ -41,5 +41,28 @@ export class FirebaseService {
     return doc(collection(this.firestore, collectionId), userId)
   }
 
+  getFormattedDatefromTimestamp(unixTimestamp: number): string {
+    console.log ('unixTimestamp', unixTimestamp);
+    let unformattedDate = new Date(unixTimestamp);
+    console.log ('unformattedDate', unformattedDate);
+    let formattedDate = unformattedDate.toLocaleDateString();
+    console.log (formattedDate);
+    return formattedDate;
+  }
+
+  // Methode zum Konvertieren von Unix-Zeitstempel (in Millisekunden) in ein Date-Objekt
+  unixTimestampToDate(unixTimestamp: number): Date {
+    return new Date(unixTimestamp);
+  }
+
+  // Methode zum Konvertieren von Date-Objekt in Unix-Zeitstempel (in Millisekunden)
+  dateToUnixTimestamp(date: Date): number {
+    return date.getTime();
+  }
+
+  // Methode zum Formatieren eines Date-Objekts als Zeichenkette
+  getFormattedBirthDate(date: Date): string {
+    return date.toLocaleDateString();
+  }
 
 }

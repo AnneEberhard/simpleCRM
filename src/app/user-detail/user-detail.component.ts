@@ -21,6 +21,7 @@ export class UserDetailComponent implements OnInit {
   activeId!: string;
   user!:User;
   value!:number;
+  formattedDate!:string;
 
   constructor(public firebaseservice: FirebaseService, public dialog: MatDialog, private route: ActivatedRoute) { }
 
@@ -37,8 +38,9 @@ export class UserDetailComponent implements OnInit {
     try {
       const docSnapshot = await getDoc(docRef);
       if (docSnapshot.exists()) {
-        const userData = docSnapshot.data() as User;
+        const userData = docSnapshot.data();
         this.user = new User(userData);
+        this.formattedDate = this.firebaseservice.getFormattedDatefromTimestamp(this.user.birthDate);
         let level = this.user.level as number;
         this.value = level * 10;
       } else {
@@ -49,6 +51,7 @@ export class UserDetailComponent implements OnInit {
     }
   }
   
+
   openEditUserDialog() {
     const dialog = this.dialog.open(DialogEditUserComponent);
     dialog.afterClosed().subscribe((updatedUserData) => {
@@ -57,6 +60,7 @@ export class UserDetailComponent implements OnInit {
       }
     });
     dialog.componentInstance.user = new User(this.user.toJSON());
+    dialog.componentInstance.formattedDate = this.formattedDate;
   }
 
 

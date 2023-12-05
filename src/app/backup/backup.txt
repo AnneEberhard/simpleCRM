@@ -157,3 +157,61 @@ OHNE ID FUNTKIONIERT
   <button mat-button [disabled]="loading" (click)="saveUser()" cdkFocusInitial>Save</button>
 </div>
 </div>
+
+
+    public toJSON() {
+        const json = {
+          id: this.id !== undefined ? this.id : '',
+          firstName: this.firstName !== undefined ? this.firstName : '',
+          lastName: this.lastName !== undefined ? this.lastName : '',
+          birthDate: this.birthDate !== undefined ? this.birthDate : '',
+          address: this.address !== undefined ? this.address : '',
+          zipCode: this.zipCode !== undefined ? this.zipCode : '',
+          city: this.city,
+          email: this.email,
+          level: this.level !== undefined ? this.level : 0, 
+          notes: this.notes !== undefined ? this.notes : '', 
+          issue: this.issue !== undefined ? this.issue : false, 
+        };      
+        return json;
+      }
+
+      
+    public toJSON2() {
+      const json = {
+        id: this.id !== undefined ? this.id : '',
+        firstName: this.firstName !== undefined ? this.firstName : '',
+        lastName: this.lastName !== undefined ? this.lastName : '',
+        birthDate: this.birthDate instanceof Date ? this.birthDate.getTime() : '',
+        address: this.address !== undefined ? this.address : '',
+        zipCode: this.zipCode !== undefined ? this.zipCode : '',
+        city: this.city !== undefined ? this.city : '',
+        email: this.email !== undefined ? this.email : '',
+        level: this.level !== undefined ? this.level : 0,
+        notes: this.notes !== undefined ? this.notes : '',
+        issue: this.issue !== undefined ? this.issue : false, 
+      };      
+      return json;
+    }
+
+     userDataBirthDataAsDate(userData: any) {
+    let birthDateTimeStamp = userData.birthDate;
+    let birthDateTimeStampToDate = this.firebaseservice.unixTimestampToDate(birthDateTimeStamp);
+   // let birthDateFormatted = this.firebaseservice.getFormattedBirthDate(birthDateTimeStampToDate);
+   // console.log('birthDateTimeStamp ',birthDateTimeStamp);
+   // console.log('birthDateTimeStampToDate ',birthDateTimeStampToDate);
+   // console.log('birthDateFormatted ',birthDateFormatted);
+    return {
+      id: userData ? userData.id : '',
+      firstName: userData ? userData.firstName : '',
+      lastName: userData ? userData.lastName : '',
+      birthDate: birthDateTimeStampToDate,
+      address: userData ? userData.address : '',
+      zipCode: userData ? userData.zipCode : '',
+      city: userData ? userData.city : '',
+      email: userData ? userData.email : '',
+      level: userData ? userData.level : 0,
+      notes: userData ? userData.notes : '',
+      issue: userData ? userData.issue : false,
+    };
+  }
