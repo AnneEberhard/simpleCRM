@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-header><h1>Active Members</h1></mat-card-header>
+    <mat-card-header><h1>Archived Members</h1></mat-card-header>
     <mat-card-content>
         <table>
             <tr>
@@ -7,7 +7,7 @@
                 <th>Email</th>
                 <th>City</th>
             </tr>
-            <tr *ngFor="let user of userList" [routerLink]="['/user/' + user.id]">
+            <tr *ngFor="let user of userList">
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.city }}</td>
@@ -15,6 +15,4 @@
         </table>
     </mat-card-content>
   </mat-card>
-<button (click)="openDialogue()" class="addUserButton" mat-fab color="primary" matTooltip="Add User" [matTooltipPosition]="position.value!">
-    <mat-icon>add</mat-icon>
-</button>
+

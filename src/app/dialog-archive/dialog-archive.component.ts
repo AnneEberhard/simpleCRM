@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { User } from 'src/models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-archive',
@@ -13,20 +14,20 @@ export class DialogArchiveComponent {
 
   loading: boolean = false;
 
-  constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogArchiveComponent>) { }
+  constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogArchiveComponent>, private router: Router) { }
 
-
-  async saveUser() {
+  async archiveUser(){
     this.loading = true;
-    console.log(this.user.issue)
-    await this.firebaseservice.updateUser('users', this.user)
-      .then(() => {
-        this.loading = false;
-        const updatedUserData = this.user.toJSON();
-        this.dialogRef.close(updatedUserData);
-      })
-      .catch(
-        (err) => { console.error(err); }
-      );
-  }
+    await this.firebaseservice.deleteUser(this.user)
+    .then(() => {
+      this.loading = false;
+      const updatedUserData = this.user.toJSON();
+      this.dialogRef.close(updatedUserData);
+      this.router.navigate(['/user']);
+    })
+    .catch(
+      (err) => { console.error(err); }
+    );
 }
+  }
+

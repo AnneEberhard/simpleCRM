@@ -1,14 +1,10 @@
 <div class="dialogContainer">
     <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
-    <h1 mat-dialog-title>Move User to Archive?</h1>
-    <div mat-dialog-content>
-      <div class="addUserDialog width60vw">
-          <mat-checkbox class="example-margin" [(ngModel)]="user.issue">Issue</mat-checkbox>
-        <mat-form-field appearance="outline" class="width100 marginTop16">
-    
-
-        </mat-form-field>
-      </div>
+    <h1 mat-dialog-title>Do you want to archive this user?</h1>
+    <div mat-dialog-content class="addUserDialog width60vw">
+        <mat-card>  
+        <mat-card-content>{{ this.user?.firstName }} {{ this.user?.lastName }}</mat-card-content>
+      </mat-card>
     </div>
     <div mat-dialog-actions>
       <button mat-button [disabled]="loading" (click)="this.dialogRef.close()">
@@ -17,10 +13,10 @@
       <button
         mat-button
         [disabled]="loading"
-        (click)="saveUser()"
+        (click)="archiveUser()"
         cdkFocusInitial
       >
-        Save
+        Archive
       </button>
     </div>
   </div>

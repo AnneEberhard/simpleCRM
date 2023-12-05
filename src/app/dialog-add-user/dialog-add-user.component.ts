@@ -23,7 +23,7 @@ export class DialogAddUserComponent {
     if (this.birthDate) { //CAVE DELETE THIS if other required possibilities found
       this.user.birthDate = this.birthDate.getTime();
     }
-    let docRef = this.firebaseservice.getUsersRef();
+    let docRef = this.firebaseservice.getUsersRef('users');
     await addDoc(docRef, this.user.toJSON())
       .then(() => {
         this.loading = false;

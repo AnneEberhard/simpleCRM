@@ -18,7 +18,6 @@ export class DialogEditNotesComponent {
 
   async saveUser() {
     this.loading = true;
-    console.log(this.user.issue)
     await this.firebaseservice.updateUser('users', this.user)
       .then(() => {
         this.loading = false;
