@@ -34,6 +34,9 @@ import { DialogEditNotesComponent } from './dialog-edit-notes/dialog-edit-notes.
 import { DialogEditLevelComponent } from './dialog-edit-level/dialog-edit-level.component';
 import { DialogArchiveComponent } from './dialog-archive/dialog-archive.component';
 import { ArchiveComponent } from './archive/archive.component';
+import { ArchivedUserDetailComponent } from './archived-user-detail/archived-user-detail.component';
+import { RestoreComponent } from './restore/restore.component';
+import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore-user.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { ArchiveComponent } from './archive/archive.component';
     DialogEditNotesComponent,
     DialogEditLevelComponent,
     DialogArchiveComponent,
-    ArchiveComponent
+    ArchiveComponent,
+    ArchivedUserDetailComponent,
+    RestoreComponent,
+    DialogRestoreUserComponent
   ],
   imports: [
     BrowserModule,

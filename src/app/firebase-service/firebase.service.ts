@@ -13,15 +13,16 @@ export class FirebaseService {
 
   constructor(private firestore: Firestore,) { }
 
-  async deleteUser(user: User) {
+  async deleteUser(newCollectionId: string, oldCollectionId: string, user: User) {
     let userId = user.id as string;
-    let collectionId = 'users';
-    let docRef = this.getUsersRef('archive');
+    let docRef = this.getUsersRef(oldCollectionId);
     await addDoc(docRef, user.toJSON());
-    await deleteDoc(this.getSingleUserRef(collectionId, userId)).catch(
+    await deleteDoc(this.getSingleUserRef(newCollectionId, userId)).catch(
       (err) => { console.error(err) }
     );
   }
+
+
 
   async updateUser(collectionId: string, user: User) {
     if (user.id) { //ID war optional, deshalb die if, sonst gibt es Fehler

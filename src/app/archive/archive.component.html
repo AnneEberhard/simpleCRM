@@ -7,8 +7,8 @@
                 <th>Email</th>
                 <th>City</th>
             </tr>
-            <tr *ngFor="let user of userList">
-                <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <tr *ngFor="let user of userList" [routerLink]="['/archived-user/' + user.id]">
+                <td>{{ user.firstName }} {{ user.lastName }} </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.city }}</td>
               </tr>

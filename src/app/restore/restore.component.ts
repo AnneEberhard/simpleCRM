@@ -1,33 +1,33 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
-import { User } from 'src/models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
+import { User } from 'src/models/user.class';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'app-dialog-archive',
-  templateUrl: './dialog-archive.component.html',
-  styleUrls: ['./dialog-archive.component.scss']
+  selector: 'app-restore',
+  templateUrl: './restore.component.html',
+  styleUrls: ['./restore.component.scss']
 })
-export class DialogArchiveComponent {
+export class RestoreComponent {
   user!: User;
 
   loading: boolean = false;
 
-  constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogArchiveComponent>, private router: Router) { }
+  constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<RestoreComponent>, private router: Router) { }
 
-  async archiveUser(){
+  async restoreUser(){
     this.loading = true;
-    await this.firebaseservice.deleteUser('users', 'archive', this.user)
+    await this.firebaseservice.deleteUser('archive','users',  this.user)
     .then(() => {
       this.loading = false;
       const updatedUserData = this.user.toJSON();
       this.dialogRef.close(updatedUserData);
-      this.router.navigate(['/user']);
+      this.router.navigate(['/archive']);
     })
     .catch(
       (err) => { console.error(err); }
     );
 }
-  }
-
+}

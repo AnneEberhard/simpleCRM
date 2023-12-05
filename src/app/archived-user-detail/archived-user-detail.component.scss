@@ -1,0 +1,36 @@
+.userDetailHeader {
+    height: 200px;
+    background-color: rgb(143, 55, 84);
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+  
+    mat-card-content {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      margin-left: 16px;
+  
+      h2 {
+        margin: 0;
+      }
+    }
+  }
+  
+  .profilePicContainer {
+    border-radius: 100%;
+    background-color: white;
+  
+    img {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+  }
+  
+  .userDetail {
+    padding-left: 16px;
+  
+  }
+  
