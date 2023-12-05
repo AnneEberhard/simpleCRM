@@ -23,7 +23,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -35,7 +35,6 @@ import { DialogEditLevelComponent } from './dialog-edit-level/dialog-edit-level.
 import { DialogArchiveComponent } from './dialog-archive/dialog-archive.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { ArchivedUserDetailComponent } from './archived-user-detail/archived-user-detail.component';
-import { RestoreComponent } from './restore/restore.component';
 import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore-user.component';
 
 @NgModule({
@@ -53,7 +52,6 @@ import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore
     DialogArchiveComponent,
     ArchiveComponent,
     ArchivedUserDetailComponent,
-    RestoreComponent,
     DialogRestoreUserComponent
   ],
   imports: [
@@ -71,6 +69,7 @@ import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore
     MatDatepickerModule, 
     MatNativeDateModule,
     FormsModule,
+    ReactiveFormsModule,
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,

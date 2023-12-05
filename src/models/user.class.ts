@@ -29,7 +29,7 @@ export class User {
 
     public toJSON() {
         const json = {
-          id: this.id,
+          id: this.id !== undefined ? this.id : '',
           firstName: this.firstName,
           lastName: this.lastName,
           birthDate: this.birthDate,
