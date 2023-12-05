@@ -42,11 +42,8 @@ export class FirebaseService {
   }
 
   getFormattedDatefromTimestamp(unixTimestamp: number): string {
-    console.log ('unixTimestamp', unixTimestamp);
     let unformattedDate = new Date(unixTimestamp);
-    console.log ('unformattedDate', unformattedDate);
     let formattedDate = unformattedDate.toLocaleDateString();
-    console.log (formattedDate);
     return formattedDate;
   }
 

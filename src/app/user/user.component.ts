@@ -31,7 +31,6 @@ export class UserComponent implements OnInit{
 
     subUserList() {
       const q = query(this.firebaseservice.getUsersRef('users'), limit(100));
-    
       return onSnapshot(q, (querySnapshot) => {
         this.userList = [];
         querySnapshot.forEach((doc: QueryDocumentSnapshot) => {

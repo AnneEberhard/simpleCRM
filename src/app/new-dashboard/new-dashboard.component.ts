@@ -7,11 +7,11 @@ import { FirebaseService } from '../firebase-service/firebase.service';
 import { QueryDocumentSnapshot, limit, onSnapshot, query } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-new-dashboard',
+  templateUrl: './new-dashboard.component.html',
+  styleUrls: ['./new-dashboard.component.scss']
 })
-export class DashboardComponent {
+export class NewDashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
   user = new User();
@@ -45,16 +45,16 @@ export class DashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Overview Active Members', cols: 1, rows: 1, content: 'active' },
-          { title: 'Issues', cols: 1, rows: 1, content: 'active'  },
-          { title: 'Archived Members', cols: 1, rows: 1, content: 'active'  }
+          { title: 'Overview Active Members', cols: 1, rows: 1 },
+          { title: 'Issues', cols: 1, rows: 1 },
+          { title: 'Archived Members', cols: 1, rows: 1 }
         ];
       }
 
       return [
-        { title: 'Overview Active Members', cols: 2, rows: 1, content: 'active'  },
-        { title: 'Issues', cols: 1, rows: 1, content: 'active'  },
-        { title: 'Archived Members', cols: 1, rows: 1, content: 'active'  }
+        { title: 'Overview Active Members', cols: 2, rows: 1 },
+        { title: 'Issues', cols: 1, rows: 1 },
+        { title: 'Archived Members', cols: 1, rows: 1 }
       ];
     })
   );

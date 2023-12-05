@@ -36,6 +36,8 @@ import { DialogArchiveComponent } from './dialog-archive/dialog-archive.componen
 import { ArchiveComponent } from './archive/archive.component';
 import { ArchivedUserDetailComponent } from './archived-user-detail/archived-user-detail.component';
 import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore-user.component';
+import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore
     DialogArchiveComponent,
     ArchiveComponent,
     ArchivedUserDetailComponent,
-    DialogRestoreUserComponent
+    DialogRestoreUserComponent,
+    NewDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore
     MatCheckboxModule,
     MatSliderModule,
     provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-7dc7e","appId":"1:537390772148:web:ec018746afd6bb61518ce1","storageBucket":"simple-crm-7dc7e.appspot.com","apiKey":"AIzaSyADpFj9e0FEYJyZ9uPLl2KUfQTTOslk-uI","authDomain":"simple-crm-7dc7e.firebaseapp.com","messagingSenderId":"537390772148"})),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
