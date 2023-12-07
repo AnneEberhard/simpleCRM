@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService) { }
+  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authService: AuthService) { }
 
   async ngOnInit() {
     await this.firebaseservice.subUserList();

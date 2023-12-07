@@ -20,12 +20,15 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSliderModule} from '@angular/material/slider';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserComponent } from './user/user.component';
-import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { AuthService } from "./shared/services/auth.service";
+
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserComponent } from './user/user.component';
+import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
@@ -40,6 +43,8 @@ import { NewDashboardComponent } from './backup/new-dashboard/new-dashboard.comp
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ChartUserLevelComponent } from './backup/chart-user-level/chart-user-level.component';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +63,8 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
     ArchivedUserDetailComponent,
     DialogRestoreUserComponent,
     NewDashboardComponent,
-    ChartUserLevelComponent
+    ChartUserLevelComponent,
+    VerifyEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -83,10 +89,11 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
     MatSliderModule,
     provideFirebaseApp(() => initializeApp({"projectId":"simple-crm-7dc7e","appId":"1:537390772148:web:ec018746afd6bb61518ce1","storageBucket":"simple-crm-7dc7e.appspot.com","apiKey":"AIzaSyADpFj9e0FEYJyZ9uPLl2KUfQTTOslk-uI","authDomain":"simple-crm-7dc7e.firebaseapp.com","messagingSenderId":"537390772148"})),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     MatGridListModule,
-    NgxChartsModule
+    NgxChartsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
