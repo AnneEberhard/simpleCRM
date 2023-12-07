@@ -9,9 +9,12 @@ export class FirebaseService {
 
   userList: any = [];
   archiveList: any = [];
+  archiveCount: number = 0;
 
 
-  constructor(private firestore: Firestore,) { }
+  constructor(private firestore: Firestore,) {
+
+  }
 
   async deleteUser(newCollectionId: string, oldCollectionId: string, user: User) {
     let userId = user.id as string;
@@ -21,7 +24,6 @@ export class FirebaseService {
       (err) => { console.error(err) }
     );
   }
-
 
 
   async updateUser(collectionId: string, user: User) {
@@ -46,6 +48,43 @@ export class FirebaseService {
     let formattedDate = unformattedDate.toLocaleDateString();
     return formattedDate;
   }
+
+  subUserList(): Promise<void> {
+    const q = query(this.getUsersRef('users'), limit(100));
+    return new Promise<void>((resolve, reject) => {
+      onSnapshot(q, (querySnapshot) => {
+        this.userList = [];
+        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+          const docId = doc.id;
+          const userData = doc.data();
+          const user = new User(userData);
+          user.id = docId;
+          this.userList.push(user);
+          this.updateUser('users', user);
+        });
+        resolve();
+      }, reject);
+    });
+  }
+
+  subarchiveList(): Promise<void> {
+    const q = query(this.getUsersRef('archive'), limit(100));
+    return new Promise<void>((resolve, reject) => {
+      onSnapshot(q, (querySnapshot) => {
+        this.archiveList = [];
+        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+          const docId = doc.id;
+          const userData = doc.data();
+          const user = new User(userData);
+          user.id = docId;
+          this.archiveList.push(user);
+        });
+        this.archiveCount = this.archiveList.length;
+        resolve();
+      }, reject);
+    });
+  }
+
 
   // Methode zum Konvertieren von Unix-Zeitstempel (in Millisekunden) in ein Date-Objekt
   unixTimestampToDate(unixTimestamp: number): Date {

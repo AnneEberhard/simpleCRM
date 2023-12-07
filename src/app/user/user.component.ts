@@ -12,45 +12,20 @@ import { FirebaseService } from '../firebase-service/firebase.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit{
+export class UserComponent {
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
   position = new FormControl(this.positionOptions[1]);
-
-  user = new User();
-  userList: any = [];
 
   unsubUserList;
   
   constructor(public dialog: MatDialog, public firebaseservice: FirebaseService) { 
-    this.unsubUserList = this.subUserList();
+    this.unsubUserList = this.firebaseservice.subUserList();
    }
 
-  ngOnInit(): void {
-   this.unsubUserList = this.subUserList();
-    }
-
-    subUserList() {
-      const q = query(this.firebaseservice.getUsersRef('users'), limit(100));
-      return onSnapshot(q, (querySnapshot) => {
-        this.userList = [];
-        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-          const docId = doc.id;
-          const userData = doc.data();
-          const user = new User(userData);
-          user.id = docId;
-          this.userList.push(user);
-          this.firebaseservice.updateUser('users', user);
-        });
-      });
-    }
-    
 
   openDialogue() {
     this.dialog.open(DialogAddUserComponent);
   }
 
-  ngonDestroy() {
-    this.unsubUserList(); //beendet das alles wieder
-  }
 }
 

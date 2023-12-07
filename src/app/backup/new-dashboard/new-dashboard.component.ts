@@ -3,7 +3,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { User } from 'src/models/user.class';
 import { MatDialog } from '@angular/material/dialog';
-import { FirebaseService } from '../firebase-service/firebase.service';
+import { FirebaseService } from '../../firebase-service/firebase.service';
 import { QueryDocumentSnapshot, limit, onSnapshot, query } from '@angular/fire/firestore';
 
 @Component({

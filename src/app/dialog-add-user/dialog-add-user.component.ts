@@ -33,7 +33,6 @@ export class DialogAddUserComponent implements OnInit {
 
 
   async saveUser() {
-
     if (this.userForm.valid) {
       this.loading = true;
       const userData = this.returnFormData();

@@ -5,7 +5,7 @@ import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { ArchivedUserDetailComponent } from './archived-user-detail/archived-user-detail.component';
-import { NewDashboardComponent } from './new-dashboard/new-dashboard.component';
+import { NewDashboardComponent } from './backup/new-dashboard/new-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},

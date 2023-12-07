@@ -7,7 +7,7 @@
                 <th>Email</th>
                 <th>City</th>
             </tr>
-            <tr *ngFor="let user of userList" [routerLink]="['/user/' + user.id]">
+            <tr *ngFor="let user of firebaseservice.userList" [routerLink]="['/user/' + user.id]">
                 <td>{{ user.firstName }} {{ user.lastName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.city }}</td>

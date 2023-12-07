@@ -215,3 +215,163 @@ OHNE ID FUNTKIONIERT
       issue: userData ? userData.issue : false,
     };
   }
+
+   countLevels4() {
+    const levelCount = Array.from({ length: 11 }, (_, level) => ({ name: level.toString(), value: 0 }));
+
+    this.userList.forEach((user: { level: number; }) => {
+      if (user.level >= 0 && user.level <= 10) {
+        levelCount[user.level].value++;
+      }
+    });
+
+    const resultJsonArray = levelCount.filter(level => level.value > 0);
+    this.userLevelsData = resultJsonArray;
+    console.log(resultJsonArray);
+  }
+
+
+
+  countLevels3() {
+    const levelCount = Array.from({ length: 11 }, (_, level) => ({ level, count: 0 }));
+
+    this.userList.forEach((user: { level: number; }) => {
+      if (user.level >= 0 && user.level <= 10) {
+        levelCount[user.level].count++;
+      }
+    });
+
+    const resultJsonArray = levelCount.filter(level => level.count > 0);
+    this.userLevelsData = resultJsonArray;
+    console.log(resultJsonArray);
+
+  }
+
+
+  countLevels2() {
+    const levelCount = Array.from({ length: 11 }, () => 0);
+    for (let i = 0; i < this.userLevels.length; i++) {
+      this.userList.forEach((user: { level: number; }) => {
+        if (user.level == i) {
+          this.userLevels[i]++;
+        }
+      })
+    }
+    console.log('userlevel: ', this.userLevels)
+  }
+
+
+  <div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="150px">
+    <mat-grid-tile class="toptile">
+      <mat-card class="dashboard-card ">
+        <mat-card-header>
+          <mat-card-title>
+            {{ this.greetingMessage }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+            Name
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="dashboard-card ">
+        <mat-card-header>
+          <mat-card-title>
+            {{ this.userCount }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+            Members currently enrolled
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> {{ this.userAverageLevel }} </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div> Average Level</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> {{ this.userIssues }} </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div> Members currently with open Issues</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> {{ this.archiveCount }} </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Archived Members</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return [
+          { title: this.greetingMessage, cols: 1, rows: 1, content: this.nameToGreet },
+          { title: this.userCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
+          { title: this.userAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
+          { title: this.userIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
+          { title: this.firebaseservice.archiveCount, cols: 1, rows: 1, content: 'Archived Members' }
+        ];
+      }
+
+      return [
+        { title: this.greetingMessage, cols: 2, rows: 1, content: this.nameToGreet },
+        { title: this.userCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
+        { title: this.userAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
+        { title: this.userIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
+        { title: this.firebaseservice.archiveCount, cols: 1, rows: 1, content: 'Archived Members' }
+      ];
+    })
+  );
+
+    
+  
+  subUserList2() {
+    const q = query(this.getUsersRef('users'), limit(100));
+    return onSnapshot(q, (querySnapshot) => {
+      this.userList = [];
+      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+        const docId = doc.id;
+        const userData = doc.data();
+        const user = new User(userData);
+        user.id = docId;
+        this.userList.push(user);
+        console.log('FirebBaseusersList',this.userList);
+        this.updateUser('users', user);
+      });
+    });
+  }
+
+  
+  subarchiveList() {
+    const q = query(this.getUsersRef('archive'), limit(100));
+    return onSnapshot(q, (querySnapshot) => {
+      this.archiveList = [];
+      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+        const userData = doc.data();
+        const user = new User(userData);
+        this.archiveList.push(user);
+      });
+      this.archiveCount = this.archiveList.length;
+    });
+  }
