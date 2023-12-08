@@ -35,6 +35,7 @@ export class DialogAddMemberComponent {
   async saveMember() {
     if (this.memberForm.valid) {
       this.loading = true;
+      debugger;
       const memberData = this.returnFormData();
       const newMember = new Member(memberData);
 

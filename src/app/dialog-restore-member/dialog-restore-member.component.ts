@@ -16,11 +16,12 @@ export class DialogRestoreMemberComponent {
 
   loading: boolean = false;
 
-  constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogRestoreMemberComponent>, private router: Router) { }
+  constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogRestoreMemberComponent>, private router: Router) { 
+  }
 
   async restoreMember(){
     this.loading = true;
-    await this.firebaseservice.deleteMember('archive','members',  this.member)
+    await this.firebaseservice.deleteMember('archive','members', this.member)
     .then(() => {
       this.loading = false;
       const updatedMemberData = this.member.toJSON();

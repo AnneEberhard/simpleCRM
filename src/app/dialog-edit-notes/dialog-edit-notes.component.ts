@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
-import { User } from 'src/models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Member } from 'src/models/member.class';
 
@@ -19,11 +18,11 @@ export class DialogEditNotesComponent {
 
   async saveMember() {
     this.loading = true;
-    await this.firebaseservice.updateUser('members', this.member)
+    await this.firebaseservice.updateMember('members', this.member)
       .then(() => {
         this.loading = false;
-        const updatedUserData = this.member.toJSON();
-        this.dialogRef.close(updatedUserData);
+        const updatedMemberData = this.member.toJSON();
+        this.dialogRef.close(updatedMemberData);
       })
       .catch(
         (err) => { console.error(err); }

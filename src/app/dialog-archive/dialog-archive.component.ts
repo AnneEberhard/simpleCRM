@@ -20,7 +20,7 @@ export class DialogArchiveComponent {
     this.loading = true;
     await this.firebaseservice.deleteMember('members', 'archive', this.member)
     .then(() => {
-      this.loading = false;
+      this.loading = false; 
       const updatedMemberData = this.member.toJSON();
       this.dialogRef.close(updatedMemberData);
       this.router.navigate(['/member']);

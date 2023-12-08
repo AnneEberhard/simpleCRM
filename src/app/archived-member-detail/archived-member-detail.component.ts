@@ -41,6 +41,8 @@ export class ArchivedMemberDetailComponent {
     } catch (error) {
       console.error('Fehler beim Abrufen des Dokuments:', error);
     }
+    console.log('this.member.id', this.member.id);
+    console.log('this.activeId', this.activeId)
   }
 
 openRestoreDialog() {

@@ -19,11 +19,12 @@ export class FirebaseService {
 
   }
 
-  async deleteMember(newCollectionId: string, oldCollectionId: string, member: Member) {
+  async deleteMember( oldCollectionId: string, newCollectionId: string, member: Member) {
     let memberId = member.id as string;
-    let docRef = this.getRef(oldCollectionId);
+    member.id = '';
+    let docRef = this.getRef(newCollectionId);
     await addDoc(docRef, member.toJSON());
-    await deleteDoc(this.getSingleRef(newCollectionId,memberId)).catch(
+    await deleteDoc(this.getSingleRef(oldCollectionId, memberId)).catch(
       (err) => { console.error(err) }
     );
   }
@@ -70,7 +71,7 @@ export class FirebaseService {
     });
   }
 
-  subarchiveListNew(): Promise<void> {
+  subarchiveList(): Promise<void> {
     const q = query(this.getRef('archive'), limit(100));
     return new Promise<void>((resolve, reject) => {
       onSnapshot(q, (querySnapshot) => {
@@ -81,6 +82,7 @@ export class FirebaseService {
           const member = new Member(memberData);
           member.id = docId;
           this.archiveList.push(member);
+          this.updateMember('archive', member);
         });
         this.archiveCount = this.archiveList.length;
         resolve();
@@ -88,66 +90,7 @@ export class FirebaseService {
     });
   }
 
-//to delete later
-
-subarchiveList(): Promise<void> {
-  const q = query(this.getRef('archive'), limit(100));
-  return new Promise<void>((resolve, reject) => {
-    onSnapshot(q, (querySnapshot) => {
-      this.archiveList = [];
-      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-        const docId = doc.id;
-        const userData = doc.data();
-        const user = new User(userData);
-        user.id = docId;
-        this.archiveList.push(user);
-      });
-      this.archiveCount = this.archiveList.length;
-      resolve();
-    }, reject);
-  });
-}
-
-subUserList(): Promise<void> {
-  const q = query(this.getUsersRef('users'), limit(100));
-  return new Promise<void>((resolve, reject) => {
-    onSnapshot(q, (querySnapshot) => {
-      this.userList = [];
-      querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-        const docId = doc.id;
-        const userData = doc.data();
-        const user = new User(userData);
-        user.id = docId;
-        this.userList.push(user);
-        this.updateUser('users', user);
-      });
-      resolve();
-    }, reject);
-  });
-}
-  async deleteUser(newCollectionId: string, oldCollectionId: string, user: User) {
-    let userId = user.id as string;
-    let docRef = this.getUsersRef(oldCollectionId);
-    await addDoc(docRef, user.toJSON());
-    await deleteDoc(this.getSingleUserRef(newCollectionId, userId)).catch(
-      (err) => { console.error(err) }
-    );
-  }
-  async updateUser(collectionId: string, user: User) {
-    if (user.id) { //ID war optional, deshalb die if, sonst gibt es Fehler
-      let docRef = this.getSingleUserRef(collectionId, user.id);
-      await updateDoc(docRef, user.toJSON()).catch(
-        (err) => { console.error(err); } //um Fehler abzufangen
-      );
-    }
-  }
-
-  getUsersRef(collectionId: string) {
-    return collection(this.firestore, collectionId);
-  }
-  getSingleUserRef(collectionId: string, userId: string) {
-    return doc(collection(this.firestore, collectionId), userId)
-  }
+  
   // Methode zum Konvertieren von Unix-Zeitstempel (in Millisekunden) in ein Date-Objekt
   unixTimestampToDate(unixTimestamp: number): Date {
     return new Date(unixTimestamp);
