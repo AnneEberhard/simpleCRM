@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-header><h1>Active Members</h1></mat-card-header>
+  <mat-card-content>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>City</th>
+      </tr>
+      <tr
+        *ngFor="let member of firebaseservice.memberList"
+        [routerLink]="['/member/' + member.id]"
+      >
+        <td>{{ member.firstName }} {{ member.lastName }}</td>
+        <td>{{ member.email }}</td>
+        <td>{{ member.city }}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+<button
+  (click)="openDialogue()"
+  class="addMemberButton"
+  mat-fab
+  color="primary"
+  matTooltip="Add Member"
+  [matTooltipPosition]="position.value!"
+>
+  <mat-icon>add</mat-icon>
+</button>

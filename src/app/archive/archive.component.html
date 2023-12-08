@@ -7,10 +7,10 @@
                 <th>Email</th>
                 <th>City</th>
             </tr>
-            <tr *ngFor="let user of firebaseservice.archiveList" [routerLink]="['/archived-user/' + user.id]">
-                <td>{{ user.firstName }} {{ user.lastName }} </td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.city }}</td>
+            <tr *ngFor="let member of firebaseservice.archiveList" [routerLink]="['/archived-member/' + member.id]">
+                <td>{{ member.firstName }} {{ member.lastName }} </td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.city }}</td>
               </tr>
         </table>
     </mat-card-content>

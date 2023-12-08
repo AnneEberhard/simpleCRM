@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
-import { User } from 'src/models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Member } from 'src/models/member.class';
 
 @Component({
   selector: 'app-dialog-edit-level',
@@ -9,21 +9,21 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog-edit-level.component.scss']
 })
 export class DialogEditLevelComponent {
-  user!: User;
+  member!: Member;
   value!: number;
   loading: boolean = false;
 
   constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogEditLevelComponent>) { }
 
 
-  async saveUser() {
+  async saveMember() {
     this.loading = true;
-    this.user.level = this.value;
-    await this.firebaseservice.updateUser('users', this.user)
+    this.member.level = this.value;
+    await this.firebaseservice.updateMember('member', this.member)
       .then(() => {
         this.loading = false;
-        const updatedUserData = this.user.toJSON();
-        this.dialogRef.close(updatedUserData);
+        const updatedMemberData = this.member.toJSON();
+        this.dialogRef.close(updatedMemberData);
       })
       .catch(
         (err) => { console.error(err); }

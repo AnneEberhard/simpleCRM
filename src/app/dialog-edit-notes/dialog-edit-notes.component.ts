@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { User } from 'src/models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Member } from 'src/models/member.class';
 
 @Component({
   selector: 'app-dialog-edit-notes',
@@ -9,19 +10,19 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog-edit-notes.component.scss']
 })
 export class DialogEditNotesComponent {
-  user!: User;
+  member!: Member;
 
   loading: boolean = false;
 
   constructor(public firebaseservice: FirebaseService, public dialogRef: MatDialogRef<DialogEditNotesComponent>) { }
 
 
-  async saveUser() {
+  async saveMember() {
     this.loading = true;
-    await this.firebaseservice.updateUser('users', this.user)
+    await this.firebaseservice.updateUser('members', this.member)
       .then(() => {
         this.loading = false;
-        const updatedUserData = this.user.toJSON();
+        const updatedUserData = this.member.toJSON();
         this.dialogRef.close(updatedUserData);
       })
       .catch(

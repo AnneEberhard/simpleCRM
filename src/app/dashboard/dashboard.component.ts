@@ -18,23 +18,22 @@ export class DashboardComponent implements OnInit {
   private cardsSubject = new BehaviorSubject<any[]>([]);
   cards$: Observable<any[]> = this.cardsSubject.asObservable();
 
-  userCount!: number;
-  userIssues!: number;
-  userAverageLevel!: number;
+
   greetingMessage!: string;
   nameToGreet: string = 'Guest';
-
-
+  memberCount: number = 0;
+  memberIssues!: number;
+  memberAverageLevel!: number;
 
   constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authService: AuthService) { }
 
   async ngOnInit() {
-    await this.firebaseservice.subUserList();
+    await this.firebaseservice.subMemberList();
     await this.firebaseservice.subarchiveList();
-    console.log(this.firebaseservice.userList);
+    console.log(this.firebaseservice.memberList);
     console.log(this.firebaseservice.archiveList);
     this.setGreetingMessage();
-    this.countUsers();
+    this.countMembers();
     this.countIssues();
     this.countAverageLevel();
     const newCards = this.generateCards(); 
@@ -56,28 +55,32 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  countUsers() {
-    this.userCount = 0;
-    this.userCount = this.firebaseservice.userList.length;
+  countMembers() {
+    if (this.firebaseservice.memberList.length >0) {
+      this.memberCount = this.firebaseservice.memberList.length;
+    } else  {
+      this.memberCount = 0;
+    }
+    console.log('this.memberCount 1 ', this.memberCount);
   }
 
   countIssues() {
-    this.userIssues = 0;
-    this.firebaseservice.userList.forEach((user: { issue: any; }) => {
-      if (user.issue) {
-        this.userIssues++;
+    this.memberIssues = 0;
+    this.firebaseservice.memberList.forEach((member: { issue: any; }) => {
+      if (member.issue) {
+        this.memberIssues++;
       }
     });
   }
 
   countAverageLevel() {
     let levelCount: number = 0;
-    this.firebaseservice.userList.forEach((user: { level: number; }) => {
-      if (user.level >= 0 && user.level <= 10) {
-        levelCount = levelCount + user.level;
+    this.firebaseservice.memberList.forEach((member: { level: number; }) => {
+      if (member.level >= 0 && member.level <= 10) {
+        levelCount = levelCount + member.level;
       }
     });
-    this.userAverageLevel = Number((levelCount / this.firebaseservice.userList.length).toFixed(1));
+    this.memberAverageLevel = Number((levelCount / this.firebaseservice.memberList.length).toFixed(1));
   }
 
 
@@ -86,22 +89,23 @@ export class DashboardComponent implements OnInit {
   }
 
   generateCards(): any[] {
+    console.log('this.memberCount', this.memberCount);
     if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {
       return [
         { title: this.greetingMessage, cols: 1, rows: 1, content: this.nameToGreet },
-        { title: this.userCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
-        { title: this.userAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
-        { title: this.userIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
+        { title: this.memberCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
+        { title: this.memberAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
+        { title: this.memberIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
         { title: this.firebaseservice.archiveCount, cols: 1, rows: 1, content: 'Archived Members' }
       ];
     }
     return [
       { title: this.greetingMessage, cols: 2, rows: 1, content: this.nameToGreet },
-      { title: this.userCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
-      { title: this.userAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
-      { title: this.userIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
+      { title: this.memberCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
+      { title: this.memberAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
+      { title: this.memberIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
       { title: this.firebaseservice.archiveCount, cols: 1, rows: 1, content: 'Archived Members' }
     ];
   }
-  
+
 }

@@ -27,44 +27,40 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { AuthService } from "./shared/services/auth.service";
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserComponent } from './user/user.component';
-import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
-import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 import { DialogEditNotesComponent } from './dialog-edit-notes/dialog-edit-notes.component';
 import { DialogEditLevelComponent } from './dialog-edit-level/dialog-edit-level.component';
 import { DialogArchiveComponent } from './dialog-archive/dialog-archive.component';
 import { ArchiveComponent } from './archive/archive.component';
-import { ArchivedUserDetailComponent } from './archived-user-detail/archived-user-detail.component';
-import { DialogRestoreUserComponent } from './dialog-restore-user/dialog-restore-user.component';
-import { NewDashboardComponent } from './backup/new-dashboard/new-dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ChartUserLevelComponent } from './backup/chart-user-level/chart-user-level.component';
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { DialogAddMemberComponent } from './dialog-add-member/dialog-add-member.component';
+import { ArchivedMemberDetailComponent } from './archived-member-detail/archived-member-detail.component';
+import { DialogRestoreMemberComponent } from './dialog-restore-member/dialog-restore-member.component';
+import { DialogEditMemberComponent } from './dialog-edit-member/dialog-edit-member.component';
+import { MemberDetailComponent } from './member-detail/member-detail.component';
+import { MemberComponent } from './member/member.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    UserComponent,
-    DialogAddUserComponent,
-    UserDetailComponent,
     ImprintComponent,
     DialogEditAddressComponent,
-    DialogEditUserComponent,
     DialogEditNotesComponent,
     DialogEditLevelComponent,
     DialogArchiveComponent,
     ArchiveComponent,
-    ArchivedUserDetailComponent,
-    DialogRestoreUserComponent,
-    NewDashboardComponent,
-    ChartUserLevelComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    DialogAddMemberComponent,
+    ArchivedMemberDetailComponent,
+    DialogRestoreMemberComponent,
+    DialogEditMemberComponent,
+    MemberDetailComponent,
+    MemberComponent
   ],
   imports: [
     BrowserModule,

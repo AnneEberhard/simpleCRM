@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
-import { User } from 'src/models/user.class';
+import { Member } from 'src/models/member.class';
 
 @Component({
   selector: 'app-archive',
@@ -8,8 +8,8 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./archive.component.scss']
 })
 export class ArchiveComponent {
-  user = new User();
-  userList: any = [];
+  member = new Member();
+  memberList: any = [];
 
   unsubArchiveList;
   
