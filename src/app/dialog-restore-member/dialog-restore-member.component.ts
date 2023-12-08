@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { User } from 'src/models/user.class';
 import { Router } from '@angular/router';
 import { Member } from 'src/models/member.class';
 

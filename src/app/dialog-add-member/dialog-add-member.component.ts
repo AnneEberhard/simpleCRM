@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Firestore, addDoc } from '@angular/fire/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FirebaseService } from '../firebase-service/firebase.service';

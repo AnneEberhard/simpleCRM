@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from 'src/app/firebase-service/firebase.service';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -8,8 +10,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SignInComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  loading: boolean = false;
 
-  ngOnInit(): void {}
+//Old
+  constructor(public authService: AuthService, private firebaseservice: FirebaseService) { }
+
+  ngOnInit(): void {
+
+  }
 
 }

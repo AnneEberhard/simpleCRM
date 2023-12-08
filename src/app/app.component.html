@@ -1,10 +1,10 @@
 <mat-drawer-container class="matDrawerContainer" autosize >
   <mat-drawer #drawer class="sideNav" [opened]="true" mode="side">
-    <div class="logoContainer">
+    <div class="logoContainer" routerLink="">
       <img class="logo" src="/assets/img/simpleCRM-Blue-logo.png" alt="simpleCRM Logo">
     </div>
 
-    <ul class="sideNavMenu">
+    <ul class="sideNavMenu" *ngIf="this.authService.isLoggedIn">
       <li routerLink="/dashboard" routerLinkActive="router-link-active"><mat-icon color="primary">fact_check</mat-icon>Dashboard</li>
       <li routerLink="/member" routerLinkActive="router-link-active"><mat-icon color="primary">person</mat-icon>Members</li>
       <li routerLink="/archive" routerLinkActive="router-link-active"><mat-icon color="primary">inventory_2</mat-icon>Archive</li>      
