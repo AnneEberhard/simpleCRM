@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/firebase-service/firebase.service';
 import { MatFormFieldModule} from '@angular/material/form-field';
-import { AuthService } from 'src/app/shared/services/auth.service';
+import { AuthService } from 'src/app/backup/shared/services/auth.service';
 
 @Component({
   selector: 'app-sign-in',

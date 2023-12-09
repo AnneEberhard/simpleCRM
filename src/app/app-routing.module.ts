@@ -3,14 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ArchiveComponent } from './archive/archive.component';
 
-import { ForgotPasswordComponent } from './backup/forgot-password/forgot-password.component';
-import { AuthGuard } from './shared/guard/auth.guard';
 import { MemberComponent } from './member/member.component';
 import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { ArchivedMemberDetailComponent } from './archived-member-detail/archived-member-detail.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-
 
 
 const routes: Routes = [

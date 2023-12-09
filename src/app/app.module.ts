@@ -26,10 +26,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth, } from '@angular/fire/auth';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ImprintComponent } from './imprint/imprint.component';
@@ -93,10 +89,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     MatGridListModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
