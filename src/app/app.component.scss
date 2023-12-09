@@ -38,6 +38,7 @@
   }
 }
 
+
 mat-toolbar,
 mat-toolbar-row {
   height: 56px;
@@ -73,4 +74,17 @@ mat-toolbar-row {
 
 .routerContainer {
   padding: 16px 48px 16px 48px;
+}
+
+footer {
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:9999;
+
+  a {
+    color: white;
+    cursor: pointer;
+  }
 }

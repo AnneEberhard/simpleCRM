@@ -8,6 +8,8 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { ArchivedMemberDetailComponent } from './archived-member-detail/archived-member-detail.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 const routes: Routes = [
@@ -16,10 +18,12 @@ const routes: Routes = [
   { path: 'member/:id', component: MemberDetailComponent },
   { path: 'archive', component: ArchiveComponent},
   { path: 'archived-member/:id', component: ArchivedMemberDetailComponent },
+  { path: 'imprint', component: ImprintComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent }, 
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },  
-  { path: '**', redirectTo: '/sign-in' }  
+  { path: '**', redirectTo: '/sign-in' },
 ];
 
 

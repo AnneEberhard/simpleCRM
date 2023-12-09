@@ -42,6 +42,7 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 import { MemberComponent } from './member/member.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 
@@ -62,7 +63,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MemberDetailComponent,
     MemberComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
