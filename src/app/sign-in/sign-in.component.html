@@ -7,7 +7,9 @@
     <mat-label>Email</mat-label>
     <input matInput placeholder="Email" [formControl]="email" />
     <mat-icon matSuffix>mail</mat-icon>
+    <div *ngIf="emailAlert" class="alert">Unknown email</div>
   </mat-form-field>
+  
   <mat-form-field appearance="outline">
     <mat-label>Enter your password</mat-label>
     <input
@@ -15,6 +17,7 @@
       [type]="hide ? 'password' : 'text'"
       [(ngModel)]="password"
     />
+    <div *ngIf="passwordAlert" class="alert">Wrong Password</div>
     <button
       mat-icon-button
       matSuffix

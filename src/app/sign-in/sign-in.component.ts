@@ -18,8 +18,8 @@ export class SignInComponent implements OnInit{
   hide = true;
   loading: boolean = false;
   password:string;
-
-  currentUser:string;
+  passwordAlert:boolean = false;
+  emailAlert:boolean = false;
 
   constructor(private router: Router,private firebaseservice: FirebaseService) { }
   
@@ -36,6 +36,7 @@ export class SignInComponent implements OnInit{
       const enteredEmail = this.email.value;
       for (const user of this.firebaseservice.userList) {
         if (user.email === enteredEmail) {
+          this.emailAlert = false;
           const enteredPassword = this.password;
           if (enteredPassword === user.password) {
             console.log('Anmeldung erfolgreich');
@@ -44,12 +45,13 @@ export class SignInComponent implements OnInit{
             this.router.navigate(['/dashboard']);
           } else {
             console.log('Falsches Passwort');
+            this.passwordAlert = true;
           }
           return; 
         }
       }
       console.log('E-Mail nicht gefunden');
+      this.emailAlert = true;
   }
-
 }
 }

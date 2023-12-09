@@ -2,6 +2,15 @@
   flex: 1 1 auto;
 }
 
+.topBarContent {
+  justify-content: space-between;
+}
+
+.topBarContentLeft {
+  display: flex;
+  align-items: center;
+}
+
 .matDrawerContainer {
   height: 100vh;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -38,7 +47,7 @@ mat-toolbar-row {
 .sideNavMenu {
   list-style: none;
   padding: 0;
-  margin:0;
+  margin: 0;
 
   li {
     display: flex;
@@ -46,24 +55,22 @@ mat-toolbar-row {
     padding: 0 16px 0px 16px;
     height: 48px;
     cursor: pointer;
-    color: rgb(63,81,181); 
-
+    color: rgb(63, 81, 181);
 
     mat-icon {
-        margin-right: 16px;
+      margin-right: 16px;
     }
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.08);
+      background-color: rgba(0, 0, 0, 0.08);
     }
 
     &:focus {
-        outline: none;
+      outline: none;
     }
   }
 }
 
-
 .routerContainer {
-    padding: 16px 48px 16px 48px;
+  padding: 16px 48px 16px 48px;
 }

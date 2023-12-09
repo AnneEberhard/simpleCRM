@@ -27,25 +27,25 @@ body {
 }
 
 .alert {
-  color: rgb(255,64,129);
+  color: rgb(255, 64, 129);
 }
 
- .pinUpperRightCorner {
+.pinUpperRightCorner {
   position: absolute;
   top: 0;
-  right:0;
- }
+  right: 0;
+}
 
- mat-dialog-content:first-child {
+mat-dialog-content:first-child {
   margin-top: 8px;
 }
 
 .dialog {
   display: flex;
-  
+
   mat-dialog-content:first-child {
-      margin-top: 8px;
-    }
+    margin-top: 8px;
+  }
 }
 
 .dialogContainer {
@@ -53,5 +53,6 @@ body {
 }
 
 .center {
+  display: flex;
   justify-content: center;
 }
