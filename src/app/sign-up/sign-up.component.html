@@ -14,8 +14,9 @@
       <mat-icon matSuffix>mail</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Enter your password (7 characters min)</mat-label>
+      <mat-label>Enter your password</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password" />
+      <mat-hint align="start"><strong>7 characters min</strong> </mat-hint>
       <button
         mat-icon-button
         matSuffix
@@ -29,6 +30,7 @@
     <mat-form-field appearance="outline">
         <mat-label>Repeat your password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="passwordValidation"/>
+        <mat-hint align="start"><strong>7 characters min</strong> </mat-hint>
         <button
           mat-icon-button
           matSuffix

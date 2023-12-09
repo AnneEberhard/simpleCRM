@@ -28,7 +28,8 @@
           <mat-icon *ngIf="this.firebaseservice.loggedIn" class="menuIcon" (click)="drawer.toggle()">menu</mat-icon>
           <span>Simple CRM</span>
         </div>
-        <mat-icon *ngIf="this.firebaseservice.loggedIn" class="menuIcon" (click)="logout()">logout</mat-icon>
+        <mat-icon *ngIf="this.firebaseservice.loggedIn" class="menuIcon" (click)="logout()" matTooltip="Log out">logout
+        </mat-icon>
       </mat-toolbar-row>
     </mat-toolbar>
   </div>

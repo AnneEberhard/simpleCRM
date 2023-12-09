@@ -12,15 +12,25 @@ export class FirebaseService {
   memberList: any = [];
   archiveList: any = [];
   archiveCount: number = 0;
-  
-  currentUser:string;
-  loggedIn:boolean = false;
+
+  currentUser: string;
+  loggedIn: boolean = false;
 
   constructor(private firestore: Firestore,) {
-
+    this.loadFromLocalStorage();
   }
 
-  async deleteMember( oldCollectionId: string, newCollectionId: string, member: Member) {
+  private loadFromLocalStorage() {
+    const storedLoggedIn = localStorage.getItem('loggedIn');
+    const storedCurrentUser = localStorage.getItem('currentUser');
+
+    if (storedLoggedIn && storedCurrentUser) {
+      this.loggedIn = JSON.parse(storedLoggedIn);
+      this.currentUser = storedCurrentUser;
+    }
+  }
+
+  async deleteMember(oldCollectionId: string, newCollectionId: string, member: Member) {
     let memberId = member.id as string;
     member.id = '';
     let docRef = this.getRef(newCollectionId);
@@ -31,7 +41,7 @@ export class FirebaseService {
   }
 
   async updateMember(collectionId: string, member: Member) {
-    if (member.id) { 
+    if (member.id) {
       let docRef = this.getSingleRef(collectionId, member.id);
       await updateDoc(docRef, member.toJSON()).catch(
         (err) => { console.error(err); } //
@@ -40,8 +50,8 @@ export class FirebaseService {
   }
 
   async updateUser(collectionId: string, user: User) {
-    if (user.id) { 
-      let docRef = this.getSingleRef(collectionId,user.id);
+    if (user.id) {
+      let docRef = this.getSingleRef(collectionId, user.id);
       await updateDoc(docRef, user.toJSON()).catch(
         (err) => { console.error(err); } //
       );
@@ -106,12 +116,12 @@ export class FirebaseService {
       onSnapshot(q, (querySnapshot) => {
         this.userList = [];
         querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-        const docId = doc.id;
-        const userData = doc.data();
-        const user = new User(userData);
-        user.id = docId;
-        this.userList.push(user);
-        this.updateUser('users', user);
+          const docId = doc.id;
+          const userData = doc.data();
+          const user = new User(userData);
+          user.id = docId;
+          this.userList.push(user);
+          this.updateUser('users', user);
         });
         this.archiveCount = this.archiveList.length;
         resolve();
@@ -120,7 +130,7 @@ export class FirebaseService {
   }
 
 
-  
+
   // Methode zum Konvertieren von Unix-Zeitstempel (in Millisekunden) in ein Date-Objekt
   unixTimestampToDate(unixTimestamp: number): Date {
     return new Date(unixTimestamp);

@@ -16,7 +16,9 @@ export class AppComponent {
 
   logout() {
     this.firebaseservice.loggedIn = false;
-    this.firebaseservice.currentUser = '';
+    this.firebaseservice.currentUser = 'X';
+    localStorage.setItem('loggedIn', 'false'); 
+    localStorage.setItem('currentUser', 'X');
     this.router.navigate(['/sign-in']);
   }
 }

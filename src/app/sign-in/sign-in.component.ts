@@ -32,26 +32,28 @@ export class SignInComponent implements OnInit{
     if (this.email.invalid) {
       console.log('Ungültige E-Mail-Adresse');
       return;
-    } else {
-      const enteredEmail = this.email.value;
-      for (const user of this.firebaseservice.userList) {
-        if (user.email === enteredEmail) {
-          this.emailAlert = false;
-          const enteredPassword = this.password;
-          if (enteredPassword === user.password) {
-            console.log('Anmeldung erfolgreich');
-            this.firebaseservice.loggedIn = true;
-            this.firebaseservice.currentUser = user.name;
-            this.router.navigate(['/dashboard']);
-          } else {
-            console.log('Falsches Passwort');
-            this.passwordAlert = true;
-          }
-          return; 
+    }
+    const enteredEmail = this.email.value;
+    for (const user of this.firebaseservice.userList) {
+      if (user.email === enteredEmail) {
+        this.emailAlert = false;
+        const enteredPassword = this.password;
+        if (enteredPassword === user.password) {
+          console.log('Anmeldung erfolgreich');
+          this.firebaseservice.loggedIn = true;
+          this.firebaseservice.currentUser = user.name;
+          localStorage.setItem('loggedIn', 'true'); 
+          localStorage.setItem('currentUser', user.name);
+          this.router.navigate(['/dashboard']);
+        } else {
+          console.log('Falsches Passwort');
+          this.passwordAlert = true;
         }
+        return; 
       }
-      console.log('E-Mail nicht gefunden');
-      this.emailAlert = true;
+    }
+    console.log('E-Mail nicht gefunden');
+    this.emailAlert = true;
   }
-}
+  
 }
