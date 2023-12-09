@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
 
   greetingMessage!: string;
-  nameToGreet: string = 'Guest';
+  nameToGreet: string = this.firebaseservice.currentUser;
   memberCount: number = 0;
   memberIssues!: number;
   memberAverageLevel!: number;
@@ -30,8 +30,6 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     await this.firebaseservice.subMemberList();
     await this.firebaseservice.subarchiveList();
-    console.log(this.firebaseservice.memberList);
-    console.log(this.firebaseservice.archiveList);
     this.setGreetingMessage();
     this.countMembers();
     this.countIssues();
@@ -61,7 +59,6 @@ export class DashboardComponent implements OnInit {
     } else  {
       this.memberCount = 0;
     }
-    console.log('this.memberCount 1 ', this.memberCount);
   }
 
   countIssues() {
@@ -89,7 +86,6 @@ export class DashboardComponent implements OnInit {
   }
 
   generateCards(): any[] {
-    console.log('this.memberCount', this.memberCount);
     if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {
       return [
         { title: this.greetingMessage, cols: 1, rows: 1, content: this.nameToGreet },

@@ -10,10 +10,11 @@ export class FirebaseService {
 
   userList: any = [];
   memberList: any = [];
-
   archiveList: any = [];
   archiveCount: number = 0;
-
+  
+  currentUser:string;
+  loggedIn:boolean = false;
 
   constructor(private firestore: Firestore,) {
 
@@ -33,6 +34,15 @@ export class FirebaseService {
     if (member.id) { 
       let docRef = this.getSingleRef(collectionId, member.id);
       await updateDoc(docRef, member.toJSON()).catch(
+        (err) => { console.error(err); } //
+      );
+    }
+  }
+
+  async updateUser(collectionId: string, user: User) {
+    if (user.id) { 
+      let docRef = this.getSingleRef(collectionId,user.id);
+      await updateDoc(docRef, user.toJSON()).catch(
         (err) => { console.error(err); } //
       );
     }
@@ -89,6 +99,26 @@ export class FirebaseService {
       }, reject);
     });
   }
+
+  subUserList(): Promise<void> {
+    const q = query(this.getRef('users'), limit(100));
+    return new Promise<void>((resolve, reject) => {
+      onSnapshot(q, (querySnapshot) => {
+        this.userList = [];
+        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+        const docId = doc.id;
+        const userData = doc.data();
+        const user = new User(userData);
+        user.id = docId;
+        this.userList.push(user);
+        this.updateUser('users', user);
+        });
+        this.archiveCount = this.archiveList.length;
+        resolve();
+      }, reject);
+    });
+  }
+
 
   
   // Methode zum Konvertieren von Unix-Zeitstempel (in Millisekunden) in ein Date-Objekt
