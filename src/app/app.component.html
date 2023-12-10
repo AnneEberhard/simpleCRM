@@ -8,7 +8,7 @@
       />
     </div>
 
-    <ul class="sideNavMenu" *ngIf="this.firebaseservice.loggedIn">
+    <ul class="sideNavMenu" *ngIf="this.authService.isLoggedIn">
       <li routerLink="/dashboard" routerLinkActive="router-link-active">
         <mat-icon color="primary">fact_check</mat-icon>Dashboard
       </li>
@@ -25,10 +25,10 @@
     <mat-toolbar color="primary">
       <mat-toolbar-row class="topBarContent">
         <div class="topBarContentLeft">
-          <mat-icon *ngIf="this.firebaseservice.loggedIn" class="menuIcon" (click)="drawer.toggle()">menu</mat-icon>
+          <mat-icon *ngIf="this.authService.isLoggedIn" class="menuIcon" (click)="drawer.toggle()">menu</mat-icon>
           <span>Simple CRM</span>
         </div>
-        <mat-icon *ngIf="this.firebaseservice.loggedIn" class="menuIcon" (click)="logout()" matTooltip="Log out">logout
+        <mat-icon *ngIf="this.authService.isLoggedIn" class="menuIcon" (click)="authService.logout()" matTooltip="Log out">logout
         </mat-icon>
       </mat-toolbar-row>
     </mat-toolbar>

@@ -13,22 +13,12 @@ export class FirebaseService {
   archiveList: any = [];
   archiveCount: number = 0;
 
-  currentUser: string;
-  loggedIn: boolean = false;
 
   constructor(private firestore: Firestore,) {
-    this.loadFromLocalStorage();
+  
   }
 
-  private loadFromLocalStorage() {
-    const storedLoggedIn = localStorage.getItem('loggedIn');
-    const storedCurrentUser = localStorage.getItem('currentUser');
 
-    if (storedLoggedIn && storedCurrentUser) {
-      this.loggedIn = JSON.parse(storedLoggedIn);
-      this.currentUser = storedCurrentUser;
-    }
-  }
 
   async deleteMember(oldCollectionId: string, newCollectionId: string, member: Member) {
     let memberId = member.id as string;

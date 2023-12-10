@@ -3,7 +3,8 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthService } from 'src/app/backup/shared/services/auth.service';
+import { AuthService } from '../auth.service';
+
 
 
 @Component({
@@ -20,12 +21,12 @@ export class DashboardComponent implements OnInit {
 
 
   greetingMessage!: string;
-  nameToGreet: string = this.firebaseservice.currentUser;
+  nameToGreet: string;
   memberCount: number = 0;
   memberIssues!: number;
   memberAverageLevel!: number;
 
-  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authService: AuthService) { }
+  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authservice: AuthService) { }
 
   async ngOnInit() {
     await this.firebaseservice.subMemberList();
@@ -34,16 +35,16 @@ export class DashboardComponent implements OnInit {
     this.countMembers();
     this.countIssues();
     this.countAverageLevel();
-    const newCards = this.generateCards(); 
-    this.setCards(newCards); 
+    this.nameToGreet = this.authservice.auth.currentUser?.displayName;
+    const newCards = this.generateCards();
+    this.setCards(newCards);
   }
-  
+
 
 
   setGreetingMessage() {
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
-
     if (currentHour >= 0 && currentHour < 12) {
       this.greetingMessage = 'Good Morning';
     } else if (currentHour >= 12 && currentHour < 18) {
@@ -53,13 +54,15 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+
   countMembers() {
-    if (this.firebaseservice.memberList.length >0) {
+    if (this.firebaseservice.memberList.length > 0) {
       this.memberCount = this.firebaseservice.memberList.length;
-    } else  {
+    } else {
       this.memberCount = 0;
     }
   }
+
 
   countIssues() {
     this.memberIssues = 0;
@@ -69,6 +72,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
 
   countAverageLevel() {
     let levelCount: number = 0;
@@ -84,6 +88,7 @@ export class DashboardComponent implements OnInit {
   setCards(cards: any[]) {
     this.cardsSubject.next(cards);
   }
+
 
   generateCards(): any[] {
     if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {

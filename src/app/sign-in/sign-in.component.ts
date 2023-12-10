@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { FirebaseService } from '../firebase-service/firebase.service';
+import { getAuth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -13,22 +15,39 @@ import { FirebaseService } from '../firebase-service/firebase.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent implements OnInit{
+export class SignInComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
   loading: boolean = false;
-  password:string;
-  passwordAlert:boolean = false;
-  emailAlert:boolean = false;
+  password: string;
+  passwordAlert: boolean = false;
+  emailAlert: boolean = false;
 
-  constructor(private router: Router,private firebaseservice: FirebaseService) { }
-  
+  constructor(private router: Router, private firebaseservice: FirebaseService, private authservice: AuthService) { }
+
   async ngOnInit() {
     await this.firebaseservice.subUserList();
-    console.log(this.firebaseservice.userList);
   }
 
   login() {
+    if (this.email.invalid) {
+      return;
+    }
+    const email = this.email.value;
+    const password = this.password;
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  }
+
+  login2() {
     if (this.email.invalid) {
       console.log('Ungültige E-Mail-Adresse');
       return;
@@ -39,21 +58,16 @@ export class SignInComponent implements OnInit{
         this.emailAlert = false;
         const enteredPassword = this.password;
         if (enteredPassword === user.password) {
-          console.log('Anmeldung erfolgreich');
-          this.firebaseservice.loggedIn = true;
-          this.firebaseservice.currentUser = user.name;
-          localStorage.setItem('loggedIn', 'true'); 
-          localStorage.setItem('currentUser', user.name);
           this.router.navigate(['/dashboard']);
         } else {
           console.log('Falsches Passwort');
           this.passwordAlert = true;
         }
-        return; 
+        return;
       }
     }
     console.log('E-Mail nicht gefunden');
     this.emailAlert = true;
   }
-  
+
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './backup/shared/services/auth.service';
 import { FirebaseService } from './firebase-service/firebase.service';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +14,4 @@ export class AppComponent {
 
   title = 'simple-crm';
 
-  logout() {
-    this.firebaseservice.loggedIn = false;
-    this.firebaseservice.currentUser = 'X';
-    localStorage.setItem('loggedIn', 'false'); 
-    localStorage.setItem('currentUser', 'X');
-    this.router.navigate(['/sign-in']);
-  }
 }

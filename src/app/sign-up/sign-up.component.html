@@ -5,7 +5,7 @@
     </mat-card-header>
     <mat-form-field appearance="outline" class="marginTop16">
       <mat-label>Name</mat-label>
-      <input matInput placeholder="Name" [(ngModel)]="this.user.name" />
+      <input matInput placeholder="Name" [(ngModel)]="user.name" />
       <mat-icon matSuffix>person</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline" class="marginTop16">
@@ -40,6 +40,7 @@
         >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
+        <div *ngIf="passwordAlert" class="alert">Your passwords don't match</div>
       </mat-form-field>
     <mat-card-actions>
       <button (click)="createNewUser()" mat-button>Register</button>
