@@ -93,10 +93,10 @@ export class DashboardComponent implements OnInit {
   generateCards(): any[] {
     if (this.breakpointObserver.isMatched(Breakpoints.Handset)) {
       return [
-        { title: this.greetingMessage, cols: 1, rows: 1, content: this.nameToGreet },
-        { title: this.memberCount, cols: 1, rows: 1, content: 'Members currently enrolled' },
-        { title: this.memberAverageLevel, cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
-        { title: this.memberIssues, cols: 1, rows: 1, content: 'Members with open Issues' },
+        { title: this.greetingMessage, cols: 2, rows: 1, content: this.nameToGreet },
+        { title: this.memberCount, cols: 1, rows: 1, content: 'Members' },
+        { title: this.memberAverageLevel, cols: 1, rows: 1, content: 'Average Level' },
+        { title: this.memberIssues, cols: 1, rows: 1, content: 'Open Issues' },
         { title: this.firebaseservice.archiveCount, cols: 1, rows: 1, content: 'Archived Members' }
       ];
     }

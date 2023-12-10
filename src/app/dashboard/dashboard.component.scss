@@ -25,3 +25,21 @@
   text-align: center;
 }
 
+@media (max-width:500px) {
+  .dashboard-card {
+    font-size: 14px;
+  
+    mat-card-header {
+    padding: 8px 8px 0;
+    }
+
+    mat-card-title{
+      font-size: 16px;
+      text-align: center;
+    }
+
+    mat-card-content {
+      padding: 0px 8px; 
+    }
+  }
+}
