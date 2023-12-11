@@ -31,7 +31,10 @@ export class SignInComponent implements OnInit {
 
   login() {
     if (this.email.invalid) {
+      this.emailAlert = true;
       return;
+    } else {
+      this.emailAlert = false;
     }
     const email = this.email.value;
     const password = this.password;
@@ -44,6 +47,7 @@ export class SignInComponent implements OnInit {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        this.passwordAlert = true;
       });
   }
 
