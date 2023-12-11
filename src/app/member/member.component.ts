@@ -15,11 +15,27 @@ export class MemberComponent {
   position = new FormControl(this.positionOptions[1]);
 
   subMemberList;
-  
-  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService) { 
-    this.subMemberList = this.firebaseservice.subMemberList();
-   }
 
+  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService) {
+    this.subMemberList = this.firebaseservice.subMemberList();
+    console.log(this.firebaseservice.issueFilter);
+
+  }
+
+  checkFilter() {
+    if (this.firebaseservice.issueFilter) {
+      this.subMemberList = this.firebaseservice.memberList.filter(member => member.issue === true);
+    } else {
+      this.subMemberList = this.firebaseservice.subMemberList();
+    }
+  }
+
+
+
+  unfilter() {
+    this.firebaseservice.issueFilter = false;
+    this.subMemberList = this.firebaseservice.subMemberList();
+  }
 
   openDialogue() {
     this.dialog.open(DialogAddMemberComponent);

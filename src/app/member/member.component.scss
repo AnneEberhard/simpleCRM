@@ -8,5 +8,18 @@
     padding: 0!important;
   }
   
+  mat-card-header {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    mat-card-subtitle {
+      font-style: italic;
+      cursor: pointer;
+
+      &:hover {
+        color:black !important;
+      }
+    }
+  }
 
   

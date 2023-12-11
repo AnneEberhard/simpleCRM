@@ -5,6 +5,7 @@ import { FirebaseService } from '../firebase-service/firebase.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 
@@ -27,7 +28,7 @@ export class DashboardComponent implements OnInit {
   memberIssues!: number;
   memberAverageLevel!: number;
 
-  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authservice: AuthService) { }
+  constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authservice: AuthService, public router: Router) { }
 
   async ngOnInit() {
     await this.firebaseservice.subMemberList();
@@ -91,13 +92,24 @@ export class DashboardComponent implements OnInit {
 
 
   generateCards(): any[] {
-      return [
-        { title: this.greetingMessage, cols: 2, rows: 1, content: this.nameToGreet },
-        { title: this.memberCount, cols: 1, rows: 1, content: 'Members' },
-        { title: this.memberAverageLevel, cols: 1, rows: 1, content: 'Average Level' },
-        { title: this.memberIssues, cols: 1, rows: 1, content: 'Open Issues' },
-        { title: this.firebaseservice.archiveCount, cols: 1, rows: 1, content: 'Archived Members' }
-      ];
+    return [
+      { title: this.greetingMessage, show: false, action: '', cols: 2, rows: 1, content: this.nameToGreet },
+      { title: this.memberCount, show: true, action: () => this.navigateToMember('none'), cols: 1, rows: 1, content: 'Members' },
+      { title: this.memberAverageLevel, show: true, action: () => this.navigateToMember('none'), cols: 1, rows: 1, content: 'Average Level' },
+      { title: this.memberIssues, show: true, action: () => this.navigateToMember('issue'), cols: 1, rows: 1, content: 'Open Issues' },
+      { title: this.firebaseservice.archiveCount, show: true, action: () => this.navigateToArchive(), cols: 1, rows: 1, content: 'Archived Members' }
+    ];
   }
 
+
+  navigateToMember(filter): void {
+    if (filter == 'issue') {
+      this.firebaseservice.issueFilter = true;
+    }
+    this.router.navigate(['/member']);
+  }
+
+  navigateToArchive(): void {
+    this.router.navigate(['/archive']);
+  }
 }

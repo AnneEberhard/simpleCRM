@@ -8,10 +8,11 @@ import { User } from 'src/models/user.class';
 })
 export class FirebaseService {
 
-  userList: any = [];
+
   memberList: any = [];
   archiveList: any = [];
   archiveCount: number = 0;
+  issueFilter:boolean = false;
 
 
   constructor(private firestore: Firestore,) {
@@ -39,14 +40,6 @@ export class FirebaseService {
     }
   }
 
-  async updateUser(collectionId: string, user: User) {
-    if (user.id) {
-      let docRef = this.getSingleRef(collectionId, user.id);
-      await updateDoc(docRef, user.toJSON()).catch(
-        (err) => { console.error(err); } //
-      );
-    }
-  }
 
   getRef(collectionId: string) {
     return collection(this.firestore, collectionId);
@@ -100,40 +93,10 @@ export class FirebaseService {
     });
   }
 
-  subUserList(): Promise<void> {
-    const q = query(this.getRef('users'), limit(100));
-    return new Promise<void>((resolve, reject) => {
-      onSnapshot(q, (querySnapshot) => {
-        this.userList = [];
-        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
-          const docId = doc.id;
-          const userData = doc.data();
-          const user = new User(userData);
-          user.id = docId;
-          this.userList.push(user);
-          this.updateUser('users', user);
-        });
-        this.archiveCount = this.archiveList.length;
-        resolve();
-      }, reject);
-    });
-  }
 
 
 
-  // Methode zum Konvertieren von Unix-Zeitstempel (in Millisekunden) in ein Date-Objekt
-  unixTimestampToDate(unixTimestamp: number): Date {
-    return new Date(unixTimestamp);
-  }
 
-  // Methode zum Konvertieren von Date-Objekt in Unix-Zeitstempel (in Millisekunden)
-  dateToUnixTimestamp(date: Date): number {
-    return date.getTime();
-  }
 
-  // Methode zum Formatieren eines Date-Objekts als Zeichenkette
-  getFormattedBirthDate(date: Date): string {
-    return date.toLocaleDateString();
-  }
 
 }

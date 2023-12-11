@@ -45,7 +45,6 @@ export class ChartUserLevelComponent {
     const members: Member[] = this.firebaseservice.memberList;
     const levelCounts = this.countMembersByLevel(members);
     const transformedData = this.transformLevelCounts(levelCounts);
-    console.log(transformedData);
     this.data = this.transformLevelCounts(levelCounts);
     this.dataVBC = this.data;
     

@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
   constructor(private router: Router, private firebaseservice: FirebaseService, private authservice: AuthService) { }
 
   async ngOnInit() {
-    await this.firebaseservice.subUserList();
+    
   }
 
   login() {
@@ -51,27 +51,5 @@ export class SignInComponent implements OnInit {
       });
   }
 
-  login2() {
-    if (this.email.invalid) {
-      console.log('Ungültige E-Mail-Adresse');
-      return;
-    }
-    const enteredEmail = this.email.value;
-    for (const user of this.firebaseservice.userList) {
-      if (user.email === enteredEmail) {
-        this.emailAlert = false;
-        const enteredPassword = this.password;
-        if (enteredPassword === user.password) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          console.log('Falsches Passwort');
-          this.passwordAlert = true;
-        }
-        return;
-      }
-    }
-    console.log('E-Mail nicht gefunden');
-    this.emailAlert = true;
-  }
 
 }
