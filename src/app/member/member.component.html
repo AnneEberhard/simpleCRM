@@ -2,6 +2,8 @@
   <mat-card-header>
     <h1>Active Members</h1>
     <mat-card-subtitle *ngIf="this.firebaseservice.issueFilter" (click)="unfilter()">Filtered - click to unfilter</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!this.firebaseservice.issueFilter" (click)="filter()">Click to filter for issues</mat-card-subtitle>
+
   </mat-card-header>
  
   <mat-card-content>

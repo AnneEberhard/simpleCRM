@@ -1,10 +1,9 @@
-import { Component, NgModule, OnInit, inject } from '@angular/core';
+import { Component,  OnInit, inject, ElementRef  } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 
@@ -95,7 +94,7 @@ export class DashboardComponent implements OnInit {
     return [
       { title: this.greetingMessage, show: false, action: '', cols: 2, rows: 1, content: this.nameToGreet },
       { title: this.memberCount, show: true, action: () => this.navigateToMember('none'), cols: 1, rows: 1, content: 'Members' },
-      { title: this.memberAverageLevel, show: true, action: () => this.navigateToMember('none'), cols: 1, rows: 1, content: 'Average Level' },
+      { title: this.memberAverageLevel, show: true, action: () => this.scrollToElement('levelChart'), cols: 1, rows: 1, content: 'Average Level' },
       { title: this.memberIssues, show: true, action: () => this.navigateToMember('issue'), cols: 1, rows: 1, content: 'Open Issues' },
       { title: this.firebaseservice.archiveCount, show: true, action: () => this.navigateToArchive(), cols: 1, rows: 1, content: 'Archived Members' }
     ];
@@ -111,5 +110,12 @@ export class DashboardComponent implements OnInit {
 
   navigateToArchive(): void {
     this.router.navigate(['/archive']);
+  }
+
+  scrollToElement(elementId: string): void {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

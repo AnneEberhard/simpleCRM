@@ -22,15 +22,10 @@ export class MemberComponent {
 
   }
 
-  checkFilter() {
-    if (this.firebaseservice.issueFilter) {
-      this.subMemberList = this.firebaseservice.memberList.filter(member => member.issue === true);
-    } else {
-      this.subMemberList = this.firebaseservice.subMemberList();
-    }
+  filter() {
+    this.firebaseservice.issueFilter = true;
+    this.subMemberList = this.firebaseservice.subMemberList();
   }
-
-
 
   unfilter() {
     this.firebaseservice.issueFilter = false;
