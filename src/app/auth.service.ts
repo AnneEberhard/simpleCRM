@@ -25,10 +25,8 @@ export class AuthService implements OnDestroy {
         if (user) {
           const uid = user.uid;
           this.isLoggedIn = true;
-          console.log(this.isLoggedIn);
         } else {
           this.isLoggedIn = false;
-          console.log(this.isLoggedIn);
         }
       });
     })}

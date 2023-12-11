@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgModule, OnInit, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { FirebaseService } from '../firebase-service/firebase.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -39,7 +40,6 @@ export class DashboardComponent implements OnInit {
     const newCards = this.generateCards();
     this.setCards(newCards);
   }
-
 
 
   setGreetingMessage() {

@@ -43,6 +43,11 @@ import { MemberComponent } from './member/member.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { MemberChartComponent } from './member-chart/member-chart.component';
+
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartUserLevelComponent } from './chart-user-level/chart-user-level.component';
+
 
 
 
@@ -64,7 +69,9 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     MemberComponent,
     SignInComponent,
     SignUpComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    MemberChartComponent,
+    ChartUserLevelComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +98,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     MatGridListModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
