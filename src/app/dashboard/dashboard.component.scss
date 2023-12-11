@@ -25,6 +25,15 @@
   text-align: center;
 }
 
+.levelChart {
+  width:100%;
+  box-sizing: border-box;
+  overflow-x: scroll;
+}
+
+@media (max-width:1200px) {
+}
+
 @media (max-width:500px) {
   .dashboard-card {
     font-size: 14px;
@@ -41,5 +50,8 @@
     mat-card-content {
       padding: 0px 8px; 
     }
+  }
+  .levelChart {
+    display: none;
   }
 }

@@ -19,18 +19,22 @@ interface LevelCount {
 
 
 export class ChartUserLevelComponent {
-  @Input() chartData: any;
 
-  data: { name: string; value: number; }[];
-  dataVBC: { name: string; value: number; }[];
+  data: LevelCount[] = [];  
+  dataVBC: LevelCount[] = [];
   viewVBC: [number, number] = [800, 300];
   animationsVBC = false;
   legendVBC = false;
   xAxisVBC = true;
   yAxisVBC = true;
   showYAxisLabelVBC = true;
-  yAxisLabelVBC = "Number of Members per Level";
-
+  yAxisLabelVBC = "Number of Members";
+  showXAxisLabelVBC = true;
+  xAxisLabelVBC = "Level";
+ 
+  yAxisTickFormatting(value: number): string {
+    return Number.isInteger(value) ? value.toString() : '';
+  }
 
   constructor(public firebaseservice: FirebaseService) {
 
@@ -44,6 +48,7 @@ export class ChartUserLevelComponent {
     console.log(transformedData);
     this.data = this.transformLevelCounts(levelCounts);
     this.dataVBC = this.data;
+    
   }
 
   dataLabelFormatterVBC(tooltipText: any) {
