@@ -2,13 +2,13 @@
   <h1 class="mat-h1">Dashboard of the School of Hunters</h1>
   <mat-grid-list cols="2" rowHeight="150px">
     <mat-grid-tile *ngFor="let card of cards$ | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card" > 
+      <mat-card class="dashboard-card" (click)="isSmallScreen ? card.action() : null"> 
         <mat-card-header>
           <mat-card-title>
             {{card.title}}
           </mat-card-title>
         </mat-card-header>
-        <mat-card-actions *ngIf="card.show" class="pinUpperRightCorner">
+        <mat-card-actions *ngIf="card.show && !isSmallScreen" class="pinUpperRightCorner">
           <button mat-icon-button (click)="card.action()">
             <mat-icon>more_vert</mat-icon>
           </button>

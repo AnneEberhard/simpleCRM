@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   memberCount: number = 0;
   memberIssues!: number;
   memberAverageLevel!: number;
+  isSmallScreen = false;
 
   constructor(public dialog: MatDialog, public firebaseservice: FirebaseService, public authservice: AuthService, public router: Router) { }
 
@@ -39,6 +40,10 @@ export class DashboardComponent implements OnInit {
     this.nameToGreet = this.authservice.auth.currentUser?.displayName;
     const newCards = this.generateCards();
     this.setCards(newCards);
+    this.breakpointObserver.observe([Breakpoints.XSmall])
+    .subscribe(result => {
+      this.isSmallScreen = result.matches;
+    });
   }
 
 
@@ -91,14 +96,22 @@ export class DashboardComponent implements OnInit {
 
 
   generateCards(): any[] {
+    if (this.breakpointObserver.isMatched(Breakpoints.XSmall)) {
     return [
-      { title: this.greetingMessage, show: false, action: '', cols: 2, rows: 1, content: this.nameToGreet },
-      { title: this.memberCount, show: true, action: () => this.navigateToMember('none'), cols: 1, rows: 1, content: 'Members' },
-      { title: this.memberAverageLevel, show: true, action: () => this.scrollToElement('levelChart'), cols: 1, rows: 1, content: 'Average Level' },
-      { title: this.memberIssues, show: true, action: () => this.navigateToMember('issue'), cols: 1, rows: 1, content: 'Open Issues' },
-      { title: this.firebaseservice.archiveCount, show: true, action: () => this.navigateToArchive(), cols: 1, rows: 1, content: 'Archived Members' }
+      { title: this.greetingMessage, show: true, action: () => this.navigateToBackground(), cols: 2, rows: 1, content: this.nameToGreet },
+      { title: this.memberCount, show: true, action: () => this.navigateToMember('none'), cols: 2, rows: 1, content: 'Members' },
+      { title: this.memberAverageLevel, show: true, action: () => this.scrollToElement('levelChart'), cols: 2, rows: 1, content: 'Average Level' },
+      { title: this.memberIssues, show: true, action: () => this.navigateToMember('issue'), cols: 2, rows: 1, content: 'Open Issues' },
+      { title: this.firebaseservice.archiveCount, show: true, action: () => this.navigateToArchive(), cols: 2, rows: 1, content: 'Archived Members' }
     ];
-  }
+  }    return [
+    { title: this.greetingMessage, show: true, action: () => this.navigateToBackground(), cols: 2, rows: 1, content: this.nameToGreet },
+    { title: this.memberCount, show: true, action: () => this.navigateToMember('none'), cols: 1, rows: 1, content: 'Members currently enrolled' },
+    { title: this.memberAverageLevel, show: true, action: () => this.scrollToElement('levelChart'), cols: 1, rows: 1, content: 'Average Level of enrolled Members' },
+    { title: this.memberIssues, show: true, action: () => this.navigateToMember('issue'), cols: 1, rows: 1, content: 'Members with open Issues' },
+    { title: this.firebaseservice.archiveCount, show: true, action: () => this.navigateToArchive(), cols: 1, rows: 1, content: 'Archived Members' }
+  ];
+}
 
 
   navigateToMember(filter): void {
@@ -110,6 +123,10 @@ export class DashboardComponent implements OnInit {
 
   navigateToArchive(): void {
     this.router.navigate(['/archive']);
+  }
+
+  navigateToBackground(): void {
+    this.router.navigate(['/background']);
   }
 
   scrollToElement(elementId: string): void {

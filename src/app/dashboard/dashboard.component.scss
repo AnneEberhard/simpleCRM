@@ -31,7 +31,12 @@
   overflow-x: scroll;
 }
 
-@media (max-width:1200px) {
+@media (max-width:600px) {
+  .dashboard-card:hover {
+    cursor: pointer;
+    background-color: #9DC2E5;
+
+  }
 }
 
 @media (max-width:500px) {

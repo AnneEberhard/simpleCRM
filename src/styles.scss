@@ -119,8 +119,14 @@ table {
       white-space: normal;
     }
   }
- 
+
+  h2, span {
+    word-break: break-all;
+    white-space: normal;
+  }
+
 }
+
 
 /*scroll*/
 ::-webkit-scrollbar {
