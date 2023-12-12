@@ -17,6 +17,7 @@ export class DialogEditLevelComponent {
 
 
   async saveMember() {
+    if (this.isValidLevel()) {
     this.loading = true;
     this.member.level = this.value;
     await this.firebaseservice.updateMember('member', this.member)
@@ -28,5 +29,11 @@ export class DialogEditLevelComponent {
       .catch(
         (err) => { console.error(err); }
       );
+  }}
+
+  isValidLevel(): boolean {
+    return this.value >= 0 && this.value <= 10;
   }
 }
+
+

@@ -12,7 +12,10 @@
       </mat-card>
       <mat-form-field appearance="outline" class="marginTop32 ">
         <mat-label>New Level</mat-label>
-        <input [(ngModel)]="value" matInput placeholder="0-10" type="number" min="0" max="10" />
+        <input [(ngModel)]="value" matInput placeholder="0-10" type="number" name="newLevel" #newLevel="ngModel" min="0" max="10" />
+        <mat-error *ngIf="newLevel.invalid && (newLevel.dirty || newLevel.touched)">
+          Please enter a valid number between 0 and 10.
+        </mat-error>
       </mat-form-field>
       <mat-card-actions align="end">
         <button

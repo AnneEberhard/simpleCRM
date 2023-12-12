@@ -47,6 +47,7 @@ import { MemberChartComponent } from './member-chart/member-chart.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartUserLevelComponent } from './chart-user-level/chart-user-level.component';
+import { BackgroundComponent } from './background/background.component';
 
 
 
@@ -71,7 +72,8 @@ import { ChartUserLevelComponent } from './chart-user-level/chart-user-level.com
     SignUpComponent,
     PrivacyPolicyComponent,
     MemberChartComponent,
-    ChartUserLevelComponent
+    ChartUserLevelComponent,
+    BackgroundComponent
   ],
   imports: [
     BrowserModule,
